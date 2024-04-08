@@ -40,10 +40,12 @@ export function SignInForm() {
     <div className="w-full h-screen lg:grid lg:min-h-[600px] lg:grid-cols-2 xl:min-h-[800px]">
       <div className="hidden md:block bg-black relative">
         <div className="flex items-center gap-1 absolute left-12 top-12">
-          <div className="bg-white text-black rounded-md">
-            <SmilePlus className="size-8" />
+          <div className="p-1 text-white rounded-md">
+            <SmilePlus className="size-7" />
           </div>
-          <span className="font-display text-2xl text-white">pollify.</span>
+          <span className="font-bold font-logo text-2xl text-white underline">
+            pollify.
+          </span>
         </div>
 
         <div className="flex flex-col gap-2 absolute left-12 bottom-12 text-white px-4">

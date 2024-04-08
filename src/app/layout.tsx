@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Inter, Kalam } from "next/font/google";
 import { cn } from "@/lib/utils";
 import "./globals.css";
 
@@ -7,6 +7,12 @@ const sans = Inter({
   subsets: ["latin"],
   weight: ["400", "500", "600", "700", "800", "900"],
   variable: "--font-sans",
+});
+
+const logo = Kalam({
+  subsets: ["latin"],
+  weight: ["400", "700"],
+  variable: "--font-logo",
 });
 
 export const metadata: Metadata = {
@@ -25,7 +31,8 @@ export default function RootLayout({
       <body
         className={cn(
           "min-h-screen font-sans antialiased text-black",
-          sans.variable
+          sans.variable,
+          logo.variable
         )}
       >
         {children}

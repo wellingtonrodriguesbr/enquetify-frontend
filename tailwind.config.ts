@@ -13,6 +13,7 @@ const config = {
     extend: {
       fontFamily: {
         sans: ["var(--font-sans)"],
+        logo: ["var(--font-logo)"],
       },
       keyframes: {
         "accordion-down": {

@@ -9,77 +9,79 @@ import {
   TableRow,
 } from "@/components/ui/table";
 
-const invoices = [
+const ids = [
   {
-    invoice: "INV001",
-    paymentStatus: "Paid",
-    totalAmount: "$250.00",
-    paymentMethod: "Credit Card",
+    id: "INV001",
+    name: "Enquete de teste para o produto X",
+    totalClicks: "10",
+    status: "Concluída",
   },
   {
-    invoice: "INV002",
-    paymentStatus: "Pending",
-    totalAmount: "$150.00",
-    paymentMethod: "PayPal",
+    id: "INV002",
+    name: "Enquete de teste para o produto X",
+    totalClicks: "10",
+    status: "Em andamento",
   },
   {
-    invoice: "INV003",
-    paymentStatus: "Unpaid",
-    totalAmount: "$350.00",
-    paymentMethod: "Bank Transfer",
+    id: "INV003",
+    name: "Enquete de teste para o produto Y",
+    totalClicks: "10",
+    status: "Cancelada",
   },
   {
-    invoice: "INV004",
-    paymentStatus: "Paid",
-    totalAmount: "$450.00",
-    paymentMethod: "Credit Card",
+    id: "INV004",
+    name: "Enquete de teste para o produto Z",
+    totalClicks: "10",
+    status: "Concluída",
   },
   {
-    invoice: "INV005",
-    paymentStatus: "Paid",
-    totalAmount: "$550.00",
-    paymentMethod: "PayPal",
+    id: "INV005",
+    name: "Enquete de teste para o produto Z",
+    totalClicks: "10",
+    status: "Em andamento",
   },
   {
-    invoice: "INV006",
-    paymentStatus: "Pending",
-    totalAmount: "$200.00",
-    paymentMethod: "Bank Transfer",
+    id: "INV006",
+    name: "Enquete de teste para o produto X",
+    totalClicks: "10",
+    status: "Cancelada",
   },
   {
-    invoice: "INV007",
-    paymentStatus: "Unpaid",
-    totalAmount: "$300.00",
-    paymentMethod: "Credit Card",
+    id: "INV007",
+    name: "Enquete de teste para o produto Y",
+    totalClicks: "10",
+    status: "Concluída",
   },
 ];
 
 export function PollsTable() {
   return (
     <Table>
-      <TableCaption>A list of your recent invoices.</TableCaption>
       <TableHeader>
         <TableRow>
-          <TableHead className="w-[100px]">Invoice</TableHead>
+          <TableHead className="w-[100px]">Identificador</TableHead>
+          <TableHead>Nome</TableHead>
           <TableHead>Status</TableHead>
-          <TableHead>Method</TableHead>
-          <TableHead className="text-right">Amount</TableHead>
+          <TableHead className="text-right">Total de cliques</TableHead>
+          <TableHead className="text-right">Total de respostas</TableHead>
         </TableRow>
       </TableHeader>
       <TableBody>
-        {invoices.map((invoice) => (
-          <TableRow key={invoice.invoice}>
-            <TableCell className="font-medium">{invoice.invoice}</TableCell>
-            <TableCell>{invoice.paymentStatus}</TableCell>
-            <TableCell>{invoice.paymentMethod}</TableCell>
-            <TableCell className="text-right">{invoice.totalAmount}</TableCell>
+        {ids.map((id) => (
+          <TableRow key={id.id}>
+            <TableCell className="font-medium">{id.id}</TableCell>
+            <TableCell>{id.name}</TableCell>
+            <TableCell>{id.status}</TableCell>
+            <TableCell className="text-right">{id.totalClicks}</TableCell>
+            <TableCell className="text-right">{id.totalClicks}</TableCell>
           </TableRow>
         ))}
       </TableBody>
       <TableFooter>
         <TableRow>
           <TableCell colSpan={3}>Total</TableCell>
-          <TableCell className="text-right">$2,500.00</TableCell>
+          <TableCell className="text-right">70</TableCell>
+          <TableCell className="text-right">70</TableCell>
         </TableRow>
       </TableFooter>
     </Table>

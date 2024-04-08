@@ -14,10 +14,12 @@ export function Header({ authenticate = false }: HeaderProps) {
     <header className="w-full flex items-center py-4 h-16 border-b border-zinc-100">
       <div className="flex items-center justify-between w-full mx-auto px-4 md:px-8">
         <Link href="/" className="flex items-center gap-1">
-          <div className="bg-black text-white rounded-md">
-            <SmilePlus className="size-7" />
+          <div className="text-black rounded-md p-1">
+            <SmilePlus className="size-6" />
           </div>
-          <span className="font-display text-2xl font-bold">pollify.</span>
+          <span className="text-2xl font-logo font-bold underline">
+            pollify.
+          </span>
         </Link>
         {!authenticate ? (
           <>
