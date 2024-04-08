@@ -11,7 +11,7 @@ export function Hero() {
         Nunca foi tão fácil aumentar o engajamento de seus clientes com o seu
         negócio
       </h1>
-      <p className="text-xs md:text-base mt-4 max-w-xl text-center">
+      <p className="text-sm md:text-base mt-4 max-w-xl text-center">
         Descubra como é fácil criar conexões mais fortes com seus clientes e
         como isso impulsiona sua empresa para outros patamares.
       </p>
