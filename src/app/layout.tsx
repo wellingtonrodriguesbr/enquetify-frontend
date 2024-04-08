@@ -15,7 +15,7 @@ const sans = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Pollify | Descobrir, avaliar, medir, validar",
+  title: "Pollify | Descobrir & avaliar & medir & validar",
   description:
     "Crie e compartilhe enquetes com facilidade, garantindo decisões validadas por seus clientes para impulsionar o crescimento do seu negócio.",
 };
