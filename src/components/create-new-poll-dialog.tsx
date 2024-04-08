@@ -21,51 +21,92 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
+import { useFieldArray, useForm } from "react-hook-form";
 import { z } from "zod";
 
 const formSchema = z.object({
-  username: z.string().min(2, {
-    message: "Username must be at least 2 characters.",
+  title: z.string().min(2, {
+    message: "Dê um nome para sua enquete",
   }),
+
+  options: z.array(
+    z.object({
+      option: z.string().min(2, {
+        message: "Dê um nome para sua enquete",
+      }),
+    })
+  ),
 });
 
 export function CreateNewPollDialog() {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      username: "",
+      title: "",
+      options: [],
     },
   });
+
+  const { fields, append } = useFieldArray({
+    control: form.control,
+    name: "options",
+  });
+
   function onSubmit(values: z.infer<typeof formSchema>) {
-    // Do something with the form values.
-    // ✅ This will be type-safe and validated.
     console.log(values);
   }
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button>+Criar nova enquete</Button>
+        <Button className="w-full md:w-fit">+Criar nova enquete</Button>
       </DialogTrigger>
       <DialogContent className="max-w-[350px] md:max-w-xl rounded-md">
         <DialogHeader>
           <DialogTitle className="text-2xl font-bold">Nova enquete</DialogTitle>
-          <DialogDescription>Todo mundo sai ganhando</DialogDescription>
+          {/* <DialogDescription>Todo mundo sai ganhando</DialogDescription> */}
         </DialogHeader>
         <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+          <form
+            onSubmit={form.handleSubmit(onSubmit)}
+            className="flex flex-col gap-4"
+          >
             <FormField
               control={form.control}
-              name="username"
+              name="title"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Username</FormLabel>
+                  <FormLabel>Nome da enquete</FormLabel>
                   <FormControl>
-                    <Input placeholder="shadcn" {...field} />
+                    <Input {...field} />
                   </FormControl>
-                  <FormDescription>
-                    This is your public display name.
-                  </FormDescription>
+
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            <FormField
+              control={form.control}
+              name="options"
+              render={({ field }) => (
+                <FormItem>
+                  <div className="flex justify-between items-center">
+                    <FormLabel>Opção</FormLabel>
+                    <Button
+                      variant="ghost"
+                      className="h-8"
+                      type="button"
+                      onClick={() => append({ option: "" })}
+                    >
+                      +Adicionar opção
+                    </Button>
+                  </div>
+
+                  {fields.map((field, index) => (
+                    <FormControl key={field.id}>
+                      <Input placeholder={`Opção ${index + 1}`} {...field} />
+                    </FormControl>
+                  ))}
                   <FormMessage />
                 </FormItem>
               )}

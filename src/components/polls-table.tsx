@@ -62,16 +62,20 @@ export function PollsTable() {
           <TableHead className="w-[100px]">Identificador</TableHead>
           <TableHead>Nome</TableHead>
           <TableHead>Status</TableHead>
-          <TableHead className="text-right">Total de cliques</TableHead>
-          <TableHead className="text-right">Total de respostas</TableHead>
+          <TableHead className="text-nowrap text-right">
+            Total de cliques
+          </TableHead>
+          <TableHead className="text-nowrap text-right">
+            Total de respostas
+          </TableHead>
         </TableRow>
       </TableHeader>
       <TableBody>
         {ids.map((id) => (
           <TableRow key={id.id}>
             <TableCell className="font-medium">{id.id}</TableCell>
-            <TableCell>{id.name}</TableCell>
-            <TableCell>{id.status}</TableCell>
+            <TableCell className="text-nowrap">{id.name}</TableCell>
+            <TableCell className="text-nowrap">{id.status}</TableCell>
             <TableCell className="text-right">{id.totalClicks}</TableCell>
             <TableCell className="text-right">{id.totalClicks}</TableCell>
           </TableRow>
