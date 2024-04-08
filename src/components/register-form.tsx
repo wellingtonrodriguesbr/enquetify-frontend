@@ -51,7 +51,7 @@ export function RegisterForm() {
           <div className="bg-white text-black rounded-md">
             <SmilePlus className="size-8" />
           </div>
-          <span className="font-display text-2xl text-white">Pollify</span>
+          <span className="font-display text-2xl text-white">pollify.</span>
         </div>
         <div className="flex flex-col gap-2 absolute left-12 bottom-12 text-white px-4">
           <cite className="text-xl">
