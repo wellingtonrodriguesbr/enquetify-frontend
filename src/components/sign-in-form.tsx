@@ -38,7 +38,7 @@ export function SignInForm() {
   }
   return (
     <div className="w-full h-screen lg:grid lg:min-h-[600px] lg:grid-cols-2 xl:min-h-[800px]">
-      <div className="bg-black relative">
+      <div className="hidden md:block bg-black relative">
         <div className="flex items-center gap-1 absolute left-12 top-12">
           <div className="bg-white text-black rounded-md">
             <SmilePlus className="size-8" />
@@ -59,12 +59,12 @@ export function SignInForm() {
       <div className="flex relative">
         <Link
           href="/cadastro"
-          className="absolute right-12 top-12 font-medium hover:bg-zinc-100 px-4 py-2 rounded-md"
+          className="hidden md:block absolute right-12 top-12 font-medium hover:bg-zinc-100 px-4 py-2 rounded-md"
         >
           Cadastrar-se
         </Link>
 
-        <div className="w-full flex flex-col justify-center items-center gap-8">
+        <div className="w-full h-screen flex flex-col justify-center items-center gap-8 px-4">
           <h1 className="text-3xl">Acessar plataforma</h1>
           <Form {...form}>
             <form
