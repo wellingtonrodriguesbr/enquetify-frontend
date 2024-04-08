@@ -52,6 +52,10 @@ export function CreateNewPollDialog() {
     name: "options",
   });
 
+  const {
+    formState: { errors },
+  } = form;
+
   function onSubmit(values: z.infer<typeof formSchema>) {
     console.log(values);
   }
@@ -91,27 +95,44 @@ export function CreateNewPollDialog() {
               render={({ field }) => (
                 <FormItem>
                   <div className="flex justify-between items-center">
-                    <FormLabel>Opção</FormLabel>
-                    <Button
-                      variant="ghost"
-                      className="h-8"
-                      type="button"
-                      onClick={() => append({ option: "" })}
-                    >
-                      +Adicionar opção
-                    </Button>
+                    {fields.length === 0 ? (
+                      <Button
+                        variant="secondary"
+                        className="w-full"
+                        type="button"
+                        onClick={() => append({ option: "" })}
+                      >
+                        +Adicionar opção
+                      </Button>
+                    ) : (
+                      <>
+                        <FormLabel>Opção</FormLabel>
+                        <Button
+                          variant="ghost"
+                          className="h-8"
+                          type="button"
+                          onClick={() => append({ option: "" })}
+                        >
+                          +Adicionar opção
+                        </Button>
+                      </>
+                    )}
                   </div>
 
                   {fields.map((field, index) => (
                     <FormControl key={field.id}>
-                      <Input placeholder={`Opção ${index + 1}`} {...field} />
+                      <Input
+                        placeholder={`Opção ${index + 1}`}
+                        {...form.register(`options.${index}.option`)}
+                        {...field}
+                      />
                     </FormControl>
                   ))}
                   <FormMessage />
                 </FormItem>
               )}
             />
-            <Button className="w-full">Cadastrar</Button>
+            <Button className="w-full mt-4">Cadastrar</Button>
           </form>
         </Form>
       </DialogContent>
