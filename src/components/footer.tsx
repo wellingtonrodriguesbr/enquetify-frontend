@@ -2,7 +2,7 @@ import Image from "next/image";
 
 export function Footer() {
   return (
-    <footer className="w-full absolute bottom-0">
+    <footer className="w-full relative md:absolute bottom-0">
       <div className="flex items-center justify-center">
         <Image
           src="/illustration-2.svg"
