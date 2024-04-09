@@ -21,14 +21,14 @@ export function Footer() {
         <Image
           src="/illustration-11.svg"
           alt=""
-          className="hidden md:block"
+          className="hidden xl:block"
           width={480}
           height={480}
         />
         <Image
           src="/illustration-6.svg"
           alt=""
-          className="hidden md:block"
+          className="hidden xl:block"
           width={480}
           height={480}
         />

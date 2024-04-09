@@ -1,6 +1,3 @@
-import Link from "next/link";
-import dayjs from "dayjs";
-
 import {
   Table,
   TableBody,
@@ -10,7 +7,6 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { ArrowRight } from "lucide-react";
 import { Option } from "@/hooks/use-get-poll";
 
 interface PollOptionsTable {
@@ -23,7 +19,7 @@ export function PollOptionsTable({ options }: PollOptionsTable) {
       <TableHeader>
         <TableRow>
           <TableHead className="text-nowrap">Identificador</TableHead>
-          <TableHead className="text-nowrap">Opção</TableHead>
+          <TableHead className="text-nowrap">Opções</TableHead>
           <TableHead className="text-nowrap text-right">
             Total de votos
           </TableHead>

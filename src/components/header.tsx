@@ -1,9 +1,8 @@
 import Link from "next/link";
 
-import { SmilePlus } from "lucide-react";
+import { ArrowUpRight, SmilePlus } from "lucide-react";
 import { AccountMenu } from "./account-menu";
 import { Separator } from "./ui/separator";
-import { MenuMobile } from "./menu-mobile";
 import { WhatsappIcon } from "./icons/whatsapp-icon";
 
 interface HeaderProps {
@@ -23,38 +22,41 @@ export function Header({ authenticate = false }: HeaderProps) {
           </span>
         </Link>
         {!authenticate ? (
-          <>
-            <div className="hidden md:flex items-center gap-2">
-              <Link
-                href="/"
-                className="flex items-center gap-2 text-black h-8 text-sm px-4 py-2 rounded-md font-medium hover:bg-zinc-100 transition-colors"
-              >
-                <WhatsappIcon className="size-4 fill-black" />
-                Fale conosco para uma demostração
-              </Link>
+          <div className="flex items-center gap-4">
+            <Link
+              href="https://api.whatsapp.com/send?phone=+5511950537096&text=Olá,%20quero%20uma%20demonstração%20gratuita%20da%20plataforma"
+              className="hidden md:flex items-center gap-2 text-black h-8 text-sm px-4 py-2 rounded-md font-medium hover:bg-zinc-100 transition-colors"
+            >
+              <WhatsappIcon className="size-4 fill-black" />
+              Fale conosco para uma demostração
+            </Link>
 
-              <Separator
-                orientation="vertical"
-                className="bg-zinc-200 h-4 ml-1"
-              />
+            <Separator
+              orientation="vertical"
+              className="hidden md:block bg-zinc-200 h-4 ml-1"
+            />
 
-              <Link
-                href="/entrar"
-                className="flex items-center gap-2 text-black h-8 text-sm px-4 py-2 rounded-md font-medium hover:bg-zinc-100 transition-colors"
-              >
-                Entrar
-              </Link>
-              <Link
-                href="/cadastro"
-                className="flex items-center gap-2 bg-black text-white h-8 text-sm px-4 py-2 rounded-md font-medium hover:bg-zinc-800 transition-colors"
-              >
-                Criar enquete gratuitamente
-              </Link>
-            </div>
-            <div className="block md:hidden">
-              <MenuMobile />
-            </div>
-          </>
+            <Link
+              href="/entrar"
+              className="hidden md:flex items-center gap-2 text-black h-8 text-sm px-4 py-2 rounded-md font-medium hover:bg-zinc-100 transition-colors"
+            >
+              Entrar
+            </Link>
+            <Link
+              href="/cadastro"
+              className="hidden md:flex items-center gap-2 bg-black text-white h-8 text-sm px-4 py-2 rounded-md font-medium hover:bg-zinc-800 transition-colors"
+            >
+              Criar enquete gratuitamente
+            </Link>
+
+            <Link
+              href="/cadastro"
+              className="flex md:hidden items-center gap-2 bg-black text-white h-8 text-sm px-4 py-2 rounded-md font-medium hover:bg-zinc-800 transition-colors"
+            >
+              Começar
+              <ArrowUpRight className="size-4" />
+            </Link>
+          </div>
         ) : null}
         {authenticate ? <AccountMenu /> : null}
       </div>

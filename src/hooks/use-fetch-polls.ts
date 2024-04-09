@@ -1,13 +1,14 @@
 import { api } from "@/lib/axios";
 import { useQuery } from "@tanstack/react-query";
 
+export type Polls = {
+  id: string;
+  title: string;
+  createdAt: Date;
+  updatedAt: Date;
+};
 interface FetchPollsResponse {
-  polls: {
-    id: string;
-    title: string;
-    createdAt: Date;
-    updatedAt: Date;
-  }[];
+  polls: Polls[];
 }
 
 export function useFetchPolls() {
@@ -19,5 +20,5 @@ export function useFetchPolls() {
     },
   });
 
-  return { polls: data, loading: isFetching };
+  return { polls: data ?? [], loading: isFetching };
 }

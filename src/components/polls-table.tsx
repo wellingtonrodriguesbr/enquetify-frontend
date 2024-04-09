@@ -12,12 +12,14 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { useFetchPolls } from "@/hooks/use-fetch-polls";
 import { ArrowRight } from "lucide-react";
+import { Polls } from "@/hooks/use-fetch-polls";
 
-export function PollsTable() {
-  const { polls } = useFetchPolls();
+interface PollsTableProps {
+  polls: Polls[];
+}
 
+export function PollsTable({ polls }: PollsTableProps) {
   return (
     <Table>
       <TableHeader>
