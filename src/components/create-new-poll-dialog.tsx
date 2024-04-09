@@ -72,7 +72,7 @@ export function CreateNewPollDialog() {
   return (
     <Dialog open={openDialog} onOpenChange={setOpenDialog}>
       <DialogTrigger asChild>
-        <Button className="w-full md:w-fit">+Criar nova enquete</Button>
+        <Button className="w-full md:w-fit">+ Criar nova enquete</Button>
       </DialogTrigger>
       <DialogContent className="max-w-[350px] md:max-w-xl rounded-md">
         <DialogHeader>
@@ -111,7 +111,7 @@ export function CreateNewPollDialog() {
                         type="button"
                         onClick={() => append({ option: "" })}
                       >
-                        +Adicionar opção
+                        + Adicionar opção
                       </Button>
                     ) : (
                       <>
@@ -122,7 +122,7 @@ export function CreateNewPollDialog() {
                           type="button"
                           onClick={() => append({ option: "" })}
                         >
-                          +Adicionar opção
+                          + Adicionar opção
                         </Button>
                       </>
                     )}
