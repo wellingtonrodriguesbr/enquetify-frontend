@@ -19,14 +19,14 @@ export function Hero() {
       <div className="flex flex-col md:flex-row items-center gap-2 mt-6">
         <Link
           href="/cadastro"
-          className="flex items-center gap-2 bg-black text-white h-10 px-4 py-2 rounded-md font-medium hover:bg-zinc-800 transition-colors"
+          className="w-full md:w-fit flex items-center justify-center gap-2 bg-black text-white h-10 px-4 py-2 rounded-md font-medium hover:bg-zinc-800 transition-colors"
         >
           Criar enquete gratuitamente
           <ChevronRight className="size-4" />
         </Link>
         <Link
           href="/"
-          className="flex items-center gap-2 text-black h-11 text-sm px-4 py-2 rounded-md font-medium bg-zinc-100 hover:bg-zinc-200 transition-colors"
+          className="flex items-center gap-2 text-black h-10 px-4 py-2 rounded-md font-medium bg-zinc-100 hover:bg-zinc-200 transition-colors"
         >
           <WhatsappIcon className="size-4 fill-black" />
           Fale conosco para uma demostração
