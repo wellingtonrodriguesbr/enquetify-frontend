@@ -20,7 +20,7 @@ const logo = Kalam({
 export const metadata: Metadata = {
   title: "Pollify | Descobrir & Avaliar & Medir & Validar & Engajar",
   description:
-    "Crie e compartilhe enquetes com facilidade, garantindo decisões validadas por seus clientes para descobrir, avaliar, medir e engajar. Impulsionando o crescimento do seu negócio.",
+    "Crie e compartilhe enquetes com facilidade, garantindo decisões validadas por seus clientes e colaboradores para descobrir, avaliar, medir e engajar. Impulsionando o crescimento do seu negócio.",
 };
 
 export default function RootLayout({

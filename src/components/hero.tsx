@@ -9,12 +9,12 @@ export function Hero() {
     <section className="flex flex-col items-center justify-center mt-12 md:mt-16 px-4">
       <HowItWorksDialog />
       <h1 className="max-w-5xl text-center text-2xl md:text-5xl font-bold">
-        Nunca foi tão fácil aumentar o engajamento de seus clientes com o seu
-        negócio
+        Nunca foi tão fácil aumentar o engajamento de seus clientes e
+        colaboradores
       </h1>
       <p className="text-sm md:text-base mt-4 max-w-xl text-center">
         Descubra como é fácil criar conexões mais fortes com seus clientes e
-        como isso impulsiona sua empresa para outros patamares.
+        colaboradores e como isso impulsiona sua empresa para outros patamares.
       </p>
       <div className="flex flex-col md:flex-row items-center gap-2 mt-6">
         <Link
