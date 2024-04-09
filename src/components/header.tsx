@@ -51,10 +51,10 @@ export function Header({ authenticate = false }: HeaderProps) {
 
             <Link
               href="/cadastro"
-              className="flex md:hidden items-center gap-2 bg-black text-white h-10 text-sm px-4 py-2 rounded-md font-medium hover:bg-zinc-800 transition-colors"
+              className="flex md:hidden items-center gap-2 text-black h-10 text-sm font-medium hover:bg-zinc-800 transition-colors"
             >
-              Começar
-              <ArrowUpRight className="size-4" />
+              Clique para começar
+              <ArrowUpRight className="size-3" />
             </Link>
           </div>
         ) : null}
