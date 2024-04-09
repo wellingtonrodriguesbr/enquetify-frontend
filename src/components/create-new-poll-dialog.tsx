@@ -2,27 +2,28 @@
 
 import {
   Dialog,
-  DialogClose,
   DialogContent,
-  DialogDescription,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { Button } from "@/components/ui/button";
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
+import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useFieldArray, useForm } from "react-hook-form";
 import { z } from "zod";
+import { useCreatePoll } from "@/hooks/use-create-poll";
+import { toast } from "sonner";
+import { Loader2 } from "lucide-react";
+import { useState } from "react";
 
 const formSchema = z.object({
   title: z.string().min(2, {
@@ -38,8 +39,13 @@ const formSchema = z.object({
   ),
 });
 
+type FormSchemaData = z.infer<typeof formSchema>;
+
 export function CreateNewPollDialog() {
-  const form = useForm<z.infer<typeof formSchema>>({
+  const { createPoll, isPending } = useCreatePoll();
+  const [openDialog, setOpenDialog] = useState(false);
+
+  const form = useForm<FormSchemaData>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       title: "",
@@ -52,22 +58,25 @@ export function CreateNewPollDialog() {
     name: "options",
   });
 
-  const {
-    formState: { errors },
-  } = form;
-
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log(values);
+  async function onSubmit(values: FormSchemaData) {
+    try {
+      await createPoll({ title: values.title, options: values.options });
+      setOpenDialog(false);
+      toast.success("Enquete criada com sucesso!");
+    } catch (error) {
+      console.log(error);
+      toast.error("Falha na criação da enquete, tente novamente!");
+    }
   }
+
   return (
-    <Dialog>
+    <Dialog open={openDialog} onOpenChange={setOpenDialog}>
       <DialogTrigger asChild>
         <Button className="w-full md:w-fit">+Criar nova enquete</Button>
       </DialogTrigger>
       <DialogContent className="max-w-[350px] md:max-w-xl rounded-md">
         <DialogHeader>
           <DialogTitle className="text-2xl font-bold">Nova enquete</DialogTitle>
-          {/* <DialogDescription>Todo mundo sai ganhando</DialogDescription> */}
         </DialogHeader>
         <Form {...form}>
           <form
@@ -132,7 +141,13 @@ export function CreateNewPollDialog() {
                 </FormItem>
               )}
             />
-            <Button className="w-full mt-4">Cadastrar</Button>
+            <Button disabled={isPending} className="w-full mt-4">
+              {isPending ? (
+                <Loader2 className="size-4 animate-spin" />
+              ) : (
+                "Cadastrar"
+              )}
+            </Button>
           </form>
         </Form>
       </DialogContent>

@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Inter, Kalam } from "next/font/google";
 import { cn } from "@/lib/utils";
 import "./globals.css";
+import { ReactQueryProvider } from "@/providers/react-query-provider";
+import { Toaster } from "@/components/ui/sonner";
 
 const sans = Inter({
   subsets: ["latin"],
@@ -35,7 +37,10 @@ export default function RootLayout({
           logo.variable
         )}
       >
-        {children}
+        <ReactQueryProvider>
+          {children}
+          <Toaster richColors />
+        </ReactQueryProvider>
       </body>
     </html>
   );
