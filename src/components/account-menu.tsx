@@ -32,11 +32,11 @@ export function AccountMenu() {
             </span>
           </DropdownMenuLabel>
           <DropdownMenuSeparator />
-          <DropdownMenuItem
-            asChild
-            className="text-rose-500 dark:text-rose-400 hover:text-rose-500 hover:dark:text-rose-400"
-          >
-            <button className="w-full" onClick={() => {}}>
+          <DropdownMenuItem asChild>
+            <button
+              className="w-full text-rose-500 hover:text-rose-600 hover:bg-rose-100/40 cursor-pointer font-medium"
+              onClick={() => {}}
+            >
               <LogOut className="mr-2 w-4 h-4" />
               <span>Sair</span>
             </button>
