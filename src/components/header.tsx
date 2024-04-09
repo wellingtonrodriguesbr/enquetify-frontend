@@ -51,7 +51,7 @@ export function Header({ authenticate = false }: HeaderProps) {
 
             <Link
               href="/cadastro"
-              className="flex md:hidden items-center gap-2 bg-black text-white h-8 text-sm px-4 py-2 rounded-md font-medium hover:bg-zinc-800 transition-colors"
+              className="flex md:hidden items-center gap-2 bg-black text-white h-10 text-sm px-4 py-2 rounded-md font-medium hover:bg-zinc-800 transition-colors"
             >
               Começar
               <ArrowUpRight className="size-4" />
