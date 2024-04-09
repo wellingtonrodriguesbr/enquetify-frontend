@@ -20,9 +20,9 @@ export function PollsTable() {
     <Table>
       <TableHeader>
         <TableRow>
-          <TableHead>Identificador</TableHead>
-          <TableHead>Nome</TableHead>
-          <TableHead>Criada em</TableHead>
+          <TableHead className="text-nowrap">Identificador</TableHead>
+          <TableHead className="text-nowrap">Nome</TableHead>
+          <TableHead className="text-nowrap">Criada em</TableHead>
           <TableHead className="text-nowrap text-right">
             Total de cliques
           </TableHead>
@@ -35,7 +35,9 @@ export function PollsTable() {
         {polls &&
           polls.map((poll) => (
             <TableRow key={poll.id}>
-              <TableCell className="font-medium">{poll.id}</TableCell>
+              <TableCell className="text-nowrap font-medium">
+                {poll.id}
+              </TableCell>
               <TableCell className="text-nowrap">{poll.title}</TableCell>
               <TableCell className="text-nowrap">
                 {dayjs(poll.createdAt).format("DD/MM/YYYY")}
