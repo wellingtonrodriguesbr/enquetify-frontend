@@ -53,11 +53,12 @@ export function SignInForm() {
 
         <div className="flex flex-col gap-2 absolute left-12 bottom-12 text-white px-4">
           <cite className="text-xl">
-            "As empresas que prosperam são aquelas que focam na obsessão do
-            cliente, não na obsessão pela concorrência."
+            "Empresas que escutam seus clientes podem se destacar de seus
+            concorrentes."
           </cite>
           <span className="text-zinc-400">
-            - Jeff Bezos, fundador da Amazon.
+            - Jeanne Bliss, autora de "Chief Customer Officer 2.0: How to Build
+            Your Customer-Driven Growth Engine".
           </span>
         </div>
       </div>
