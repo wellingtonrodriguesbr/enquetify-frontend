@@ -39,14 +39,17 @@ export function SignInForm() {
   return (
     <div className="w-full h-screen lg:grid lg:min-h-[600px] lg:grid-cols-2 xl:min-h-[800px]">
       <div className="hidden md:block bg-black relative">
-        <div className="flex items-center gap-1 absolute left-12 top-12">
+        <Link
+          href="/"
+          className="flex items-center gap-1 absolute left-12 top-12"
+        >
           <div className="p-1 text-white rounded-md">
             <SmilePlus className="size-7" />
           </div>
           <span className="font-bold font-logo text-2xl text-white underline">
             pollify.
           </span>
-        </div>
+        </Link>
 
         <div className="flex flex-col gap-2 absolute left-12 bottom-12 text-white px-4">
           <cite className="text-xl">
@@ -67,7 +70,25 @@ export function SignInForm() {
         </Link>
 
         <div className="w-full h-screen flex flex-col justify-center items-center gap-8 px-4">
-          <h1 className="text-3xl">Acessar plataforma</h1>
+          <div className="flex md:hidden absolute top-12 w-full justify-between">
+            <Link href="/" className="flex items-center gap-1 ml-4">
+              <div className="p-1 text-black rounded-md">
+                <SmilePlus className="size-7" />
+              </div>
+              <span className="font-bold font-logo text-2xl text-black underline">
+                pollify.
+              </span>
+            </Link>
+            <Link
+              href="/cadastro"
+              className="font-medium bg-zinc-100 px-4 py-2 rounded-md mr-4"
+            >
+              Cadastrar-se
+            </Link>
+          </div>
+          <h1 className="text-2xl md:text-3xl font-semibold">
+            Acessar plataforma
+          </h1>
           <Form {...form}>
             <form
               onSubmit={form.handleSubmit(onSubmit)}

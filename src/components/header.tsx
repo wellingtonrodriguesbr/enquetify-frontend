@@ -4,6 +4,7 @@ import { SmilePlus } from "lucide-react";
 import { AccountMenu } from "./account-menu";
 import { Separator } from "./ui/separator";
 import { MenuMobile } from "./menu-mobile";
+import { WhatsappIcon } from "./icons/whatsapp-icon";
 
 interface HeaderProps {
   authenticate?: boolean;
@@ -28,6 +29,7 @@ export function Header({ authenticate = false }: HeaderProps) {
                 href="/"
                 className="flex items-center gap-2 text-black h-8 text-sm px-4 py-2 rounded-md font-medium hover:bg-zinc-100 transition-colors"
               >
+                <WhatsappIcon className="size-4 fill-black" />
                 Fale conosco para uma demostração
               </Link>
 

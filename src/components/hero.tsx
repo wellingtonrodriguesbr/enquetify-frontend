@@ -2,6 +2,7 @@ import Link from "next/link";
 
 import { ChevronRight } from "lucide-react";
 import { HowItWorksDialog } from "./how-it-works-dialog";
+import { WhatsappIcon } from "./icons/whatsapp-icon";
 
 export function Hero() {
   return (
@@ -25,8 +26,9 @@ export function Hero() {
         </Link>
         <Link
           href="/"
-          className="flex items-center gap-2 text-black h-11 text-sm px-4 py-2 rounded-md font-medium hover:bg-zinc-100 transition-colors"
+          className="flex items-center gap-2 text-black h-11 text-sm px-4 py-2 rounded-md font-medium bg-zinc-100 hover:bg-zinc-200 transition-colors"
         >
+          <WhatsappIcon className="size-4 fill-black" />
           Fale conosco para uma demostração
         </Link>
       </div>
