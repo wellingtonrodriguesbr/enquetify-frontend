@@ -25,7 +25,7 @@ export function PollsTable({ polls }: PollsTableProps) {
       <TableHeader>
         <TableRow>
           <TableHead className="text-nowrap">Identificador</TableHead>
-          <TableHead className="text-nowrap">Nome</TableHead>
+          <TableHead className="text-nowrap">Enquete</TableHead>
           <TableHead className="text-nowrap">Criada em</TableHead>
           <TableHead className="text-nowrap text-right">
             Total de cliques
