@@ -8,29 +8,29 @@ export function Footer() {
           src="/illustration-2.svg"
           alt=""
           // className="hidden md:block"
-          width={480}
-          height={480}
+          width={400}
+          height={400}
         />
         <Image
           src="/illustration-9.svg"
           alt=""
           className="hidden md:block"
-          width={480}
-          height={480}
+          width={400}
+          height={400}
         />
         <Image
           src="/illustration-11.svg"
           alt=""
           className="hidden xl:block"
-          width={480}
-          height={480}
+          width={400}
+          height={400}
         />
         <Image
           src="/illustration-6.svg"
           alt=""
           className="hidden xl:block"
-          width={480}
-          height={480}
+          width={400}
+          height={400}
         />
       </div>
     </footer>

@@ -8,7 +8,7 @@ export function Hero() {
   return (
     <section className="flex flex-col items-center justify-center mt-12 md:mt-16 px-4">
       <HowItWorksDialog />
-      <h1 className="max-w-5xl text-center text-3xl leading-snug md:text-6xl md:leading-tight font-bold">
+      <h1 className="max-w-5xl text-center text-3xl leading-tight md:text-6xl md:leading-tight font-bold">
         Impusione o seu negócio tomando as melhores decisões
       </h1>
       <p className="text-sm md:text-base mt-4 max-w-4xl text-center">
