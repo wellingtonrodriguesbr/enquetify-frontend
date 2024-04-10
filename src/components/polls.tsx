@@ -5,9 +5,20 @@ import { CreateNewPollDialog } from "./create-new-poll-dialog";
 import { PollsSkeletetonTable } from "./polls-skeleton-table";
 import { PollsTable } from "./polls-table";
 import { Frown } from "lucide-react";
+import { useEffect } from "react";
+import { useRouter } from "next/navigation";
+import { toast } from "sonner";
 
 export function Polls() {
-  const { polls, loading } = useFetchPolls();
+  const router = useRouter();
+  const { polls, loading, error } = useFetchPolls();
+
+  useEffect(() => {
+    if (error?.message === "Request failed with status code 401") {
+      toast.error("Você não tem permissão para acessar essa página!");
+      return router.push("/");
+    }
+  }, [error?.message, router]);
 
   return (
     <section className="w-full max-w-screen-xl mx-auto px-4 mt-12 pb-12">

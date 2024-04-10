@@ -12,7 +12,7 @@ interface FetchPollsResponse {
 }
 
 export function useFetchPolls() {
-  const { data, isFetching } = useQuery({
+  const { data, isFetching, error } = useQuery({
     queryKey: ["fetchPolls"],
     queryFn: async () => {
       const { data } = await api.get<FetchPollsResponse>("/polls");
@@ -20,5 +20,5 @@ export function useFetchPolls() {
     },
   });
 
-  return { polls: data ?? [], loading: isFetching };
+  return { polls: data ?? [], loading: isFetching, error };
 }
