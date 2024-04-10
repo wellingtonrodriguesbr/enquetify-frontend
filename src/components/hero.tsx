@@ -8,12 +8,14 @@ export function Hero() {
   return (
     <section className="flex flex-col items-center justify-center mt-12 md:mt-16 px-4">
       <HowItWorksDialog />
-      <h1 className="max-w-5xl text-center text-2xl leading-snug md:text-5xl md:leading-tight font-bold">
-        Aumente o engajamento e a colaboração de seus clientes e colaboradores
+      <h1 className="max-w-5xl text-center text-3xl leading-snug md:text-6xl md:leading-tight font-bold">
+        Impusione o seu negócio tomando as melhores decisões
       </h1>
-      <p className="text-sm md:text-base mt-4 max-w-xl text-center">
-        Descubra como é fácil criar conexões mais fortes com seus clientes e
-        colaboradores e como isso impulsiona sua empresa para outros patamares.
+      <p className="text-sm md:text-base mt-4 max-w-4xl text-center">
+        Crie enquetes com perguntas estratégicas de acordo com suas necessidades
+        e descubra como é fácil estabelecer conexões mais fortes com seus
+        clientes e colaboradores, além de como isso pode ajudá-lo(a) a tomar
+        decisões mais assertivas, validadas por aqueles que realmente importam.
       </p>
       <div className="flex flex-col md:flex-row items-center gap-2 mt-6">
         <Link
