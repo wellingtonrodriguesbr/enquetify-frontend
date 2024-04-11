@@ -14,7 +14,7 @@ export function SignIn() {
           className="flex items-center gap-1 absolute left-12 top-12"
         >
           <div className="p-1 text-white rounded-md">
-            <SmilePlus className="size-7" />
+            <SmilePlus className="size-6" />
           </div>
           <span className="font-bold font-logo text-2xl text-white underline">
             pollify.
@@ -41,10 +41,10 @@ export function SignIn() {
         </Link>
 
         <div className="w-full h-screen flex flex-col justify-center items-center gap-8 px-4">
-          <div className="flex md:hidden absolute top-12 w-full justify-between">
+          <div className="flex md:hidden absolute top-3 w-full justify-between">
             <Link href="/" className="flex items-center gap-1 ml-4">
               <div className="p-1 text-black rounded-md">
-                <SmilePlus className="size-7" />
+                <SmilePlus className="size-6" />
               </div>
               <span className="font-bold font-logo text-2xl text-black underline">
                 pollify.
