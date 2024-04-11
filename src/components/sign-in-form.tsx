@@ -18,6 +18,8 @@ import { Input } from "@/components/ui/input";
 import { useSearchParams } from "next/navigation";
 import { useValidatedCode } from "@/hooks/use-validated-code";
 import { useSignIn } from "@/hooks/use-sign-in";
+import { Loader2 } from "lucide-react";
+import { PaperAirplaneLottie } from "./paper-airplane-lottie";
 
 const formSchema = z.object({
   email: z.string().min(2, {
@@ -33,7 +35,7 @@ export function SignInForm() {
     },
   });
 
-  const { signIn } = useSignIn();
+  const { signIn, isPending, isSuccess } = useSignIn();
   const params = useSearchParams();
 
   useValidatedCode({
@@ -45,30 +47,55 @@ export function SignInForm() {
   }
 
   return (
-    <Form {...form}>
-      <form
-        onSubmit={form.handleSubmit(onSubmit)}
-        className="space-y-3 w-full max-w-md"
-      >
-        <FormField
-          control={form.control}
-          name="email"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Seu e-mail</FormLabel>
-              <FormControl>
-                <Input placeholder="seuemail@email.com.br" {...field} />
-              </FormControl>
+    <>
+      {!isSuccess ? (
+        <div className="w-full flex flex-col items-center gap-12">
+          <h1 className="text-2xl md:text-3xl font-semibold">
+            Acessar plataforma
+          </h1>
+          <Form {...form}>
+            <form
+              onSubmit={form.handleSubmit(onSubmit)}
+              className="space-y-3 w-full max-w-md"
+            >
+              <FormField
+                control={form.control}
+                name="email"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Seu e-mail</FormLabel>
+                    <FormControl>
+                      <Input placeholder="seuemail@email.com.br" {...field} />
+                    </FormControl>
 
-              <FormMessage />
-            </FormItem>
-          )}
-        />
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
 
-        <Button type="submit" className="w-full">
-          Entrar
-        </Button>
-      </form>
-    </Form>
+              <Button disabled={isPending} type="submit" className="w-full">
+                {isPending && !isSuccess ? (
+                  <Loader2 className="size-4 animate-spin" />
+                ) : (
+                  "Entrar"
+                )}
+              </Button>
+            </form>
+          </Form>
+        </div>
+      ) : null}
+
+      {!isPending && isSuccess ? (
+        <div className="flex flex-col gap-2 items-center">
+          <PaperAirplaneLottie />
+          <p className="text-center text-2xl font-medium">
+            Te enviamos o e-mail com o link de acesso a plataforma!
+          </p>
+          <span className="text-center text-zinc-700 text-sm">
+            Corre lá ver! :)
+          </span>
+        </div>
+      ) : null}
+    </>
   );
 }

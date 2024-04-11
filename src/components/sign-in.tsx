@@ -60,9 +60,7 @@ export function SignIn() {
               Cadastrar-se
             </Link>
           </div>
-          <h1 className="text-2xl md:text-3xl font-semibold">
-            Acessar plataforma
-          </h1>
+
           <Suspense>
             <SignInForm />
           </Suspense>

@@ -2,7 +2,11 @@ import { api } from "@/lib/axios";
 import { useMutation } from "@tanstack/react-query";
 
 export function useSignIn() {
-  const { mutateAsync: signIn, isPending } = useMutation({
+  const {
+    mutateAsync: signIn,
+    isPending,
+    isSuccess,
+  } = useMutation({
     mutationFn: handleSignIn,
   });
 
@@ -16,5 +20,5 @@ export function useSignIn() {
     }
   }
 
-  return { signIn, loading: isPending };
+  return { signIn, isPending, isSuccess };
 }

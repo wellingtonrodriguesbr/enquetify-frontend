@@ -1,15 +1,15 @@
+"use client";
+
 import Link from "next/link";
 
 import { ArrowUpRight, SmilePlus } from "lucide-react";
 import { AccountMenu } from "./account-menu";
 import { Separator } from "./ui/separator";
 import { WhatsappIcon } from "./icons/whatsapp-icon";
+import { useGetProfile } from "@/hooks/use-get-profile";
 
-interface HeaderProps {
-  authenticate?: boolean;
-}
-
-export function Header({ authenticate = false }: HeaderProps) {
+export function Header() {
+  const { profile, loading } = useGetProfile();
   return (
     <header className="w-full flex items-center py-4 h-16 border-b border-zinc-100">
       <div className="flex items-center justify-between w-full mx-auto px-4 md:px-8">
@@ -21,7 +21,7 @@ export function Header({ authenticate = false }: HeaderProps) {
             pollify.
           </span>
         </Link>
-        {!authenticate ? (
+        {!profile && !loading ? (
           <div className="flex items-center gap-4">
             <Link
               href="https://api.whatsapp.com/send?phone=+5511950537096&text=Olá,%20quero%20uma%20demonstração%20gratuita%20da%20plataforma"
@@ -58,7 +58,7 @@ export function Header({ authenticate = false }: HeaderProps) {
             </Link>
           </div>
         ) : null}
-        {authenticate ? <AccountMenu /> : null}
+        {profile ? <AccountMenu /> : null}
       </div>
     </header>
   );
