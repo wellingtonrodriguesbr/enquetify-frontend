@@ -1,9 +1,12 @@
 import { api } from "@/lib/axios";
 import { useQuery } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
+import { useLocalStorage } from "react-use";
 import { toast } from "sonner";
 
 export function useValidatedCode({ code }: { code: string | null }) {
+  const [_, setAccessToken] = useLocalStorage("accessToken");
+
   const router = useRouter();
   useQuery({
     queryKey: ["validated-code"],
@@ -15,6 +18,7 @@ export function useValidatedCode({ code }: { code: string | null }) {
       try {
         const { data } = await api.get(`/sessions?code=${code}`);
         router.push("/enquetes");
+        setAccessToken(data.token);
         return data.token;
       } catch (error) {
         toast.error("Código de autenticação não encontrado!");

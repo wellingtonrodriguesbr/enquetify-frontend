@@ -8,17 +8,11 @@ import { Frown } from "lucide-react";
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
+import { getCookie } from "cookies-next";
 
 export function Polls() {
   const router = useRouter();
   const { polls, loading, error } = useFetchPolls();
-
-  useEffect(() => {
-    if (error?.message === "Request failed with status code 401") {
-      toast.error("Você não tem permissão para acessar essa página!");
-      return router.push("/");
-    }
-  }, [error?.message, router]);
 
   return (
     <section className="w-full max-w-screen-xl mx-auto px-4 mt-12 pb-12">
