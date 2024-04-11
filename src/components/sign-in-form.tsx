@@ -21,7 +21,7 @@ import { useSignIn } from "@/hooks/use-sign-in";
 
 const formSchema = z.object({
   email: z.string().min(2, {
-    message: "Digite seu nome completo",
+    message: "Endereço de e-mail inválido",
   }),
 });
 

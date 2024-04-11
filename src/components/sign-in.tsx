@@ -1,9 +1,12 @@
 /* eslint-disable react/no-unescaped-entities */
 
+"use client";
+
 import Link from "next/link";
 
 import { SmilePlus } from "lucide-react";
 import { SignInForm } from "./sign-in-form";
+import { Suspense } from "react";
 
 export function SignIn() {
   return (
@@ -60,7 +63,9 @@ export function SignIn() {
           <h1 className="text-2xl md:text-3xl font-semibold">
             Acessar plataforma
           </h1>
-          <SignInForm />
+          <Suspense>
+            <SignInForm />
+          </Suspense>
         </div>
       </div>
     </div>
