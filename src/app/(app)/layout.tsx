@@ -7,7 +7,7 @@ export default function HomeLayout({
 }>) {
   return (
     <>
-      <Header authenticate />
+      <Header />
       <main>{children}</main>
     </>
   );
