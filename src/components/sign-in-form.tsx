@@ -14,11 +14,12 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { useSearchParams } from "next/navigation";
-import { useValidatedCode } from "@/hooks/use-validated-code";
 import { useSignIn } from "@/hooks/use-sign-in";
 import { Loader2 } from "lucide-react";
 import { PaperAirplaneLottie } from "./paper-airplane-lottie";
+import { useGetProfile } from "@/hooks/use-get-profile";
+import { redirect } from "next/navigation";
+import { useLayoutEffect } from "react";
 
 const formSchema = z.object({
   email: z.string().min(2, {
@@ -28,6 +29,8 @@ const formSchema = z.object({
 
 export function SignInForm() {
   const { signIn, isPending, status } = useSignIn();
+  const { profile, loading } = useGetProfile();
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -42,6 +45,12 @@ export function SignInForm() {
       console.log(error);
     }
   }
+
+  useLayoutEffect(() => {
+    if (profile && !loading) {
+      redirect("/enquetes");
+    }
+  }, [profile, loading]);
 
   return (
     <>

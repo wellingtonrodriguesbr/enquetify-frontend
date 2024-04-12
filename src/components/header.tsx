@@ -7,6 +7,7 @@ import { AccountMenu } from "./account-menu";
 import { Separator } from "./ui/separator";
 import { WhatsappIcon } from "./icons/whatsapp-icon";
 import { useGetProfile } from "@/hooks/use-get-profile";
+import { Skeleton } from "./ui/skeleton";
 
 export function Header() {
   const { profile, loading } = useGetProfile();
@@ -58,6 +59,19 @@ export function Header() {
             </Link>
           </div>
         ) : null}
+
+        {!profile && loading ? (
+          <div className="flex items-center gap-4">
+            <Skeleton className="w-48 md:w-96 h-8" />
+            <Separator
+              orientation="vertical"
+              className="hidden md:block bg-zinc-200 h-4 ml-1"
+            />
+            <Skeleton className="hidden md:block w-36 h-8" />
+            <Skeleton className="hidden md:block w-56 h-8" />
+          </div>
+        ) : null}
+
         {profile ? <AccountMenu /> : null}
       </div>
     </header>

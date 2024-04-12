@@ -20,6 +20,10 @@ interface PollsTableProps {
 }
 
 export function PollsTable({ polls }: PollsTableProps) {
+  const total = polls.reduce((acc, currentValue) => {
+    return (acc += currentValue.votes.length);
+  }, 0);
+
   return (
     <Table>
       <TableHeader>
@@ -51,7 +55,7 @@ export function PollsTable({ polls }: PollsTableProps) {
               <TableCell className="text-right">
                 <CopyLinkButton pollId={poll.id} />
               </TableCell>
-              <TableCell className="text-right">10</TableCell>
+              <TableCell className="text-right">{poll.votes.length}</TableCell>
               <TableCell className="flex justify-end pt-6">
                 <Link
                   href={`/enquete/${poll.id}`}
@@ -68,7 +72,7 @@ export function PollsTable({ polls }: PollsTableProps) {
         <TableRow>
           <TableCell colSpan={3}>Total</TableCell>
           <TableCell className="text-right"></TableCell>
-          <TableCell className="text-right">70</TableCell>
+          <TableCell className="text-right">{total}</TableCell>
           <TableCell className="text-right"></TableCell>
         </TableRow>
       </TableFooter>

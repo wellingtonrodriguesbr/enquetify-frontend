@@ -14,6 +14,10 @@ interface PollOptionsTable {
 }
 
 export function PollOptionsTable({ options }: PollOptionsTable) {
+  const total = options.reduce((acc, currentValue) => {
+    return (acc += currentValue.score);
+  }, 0);
+
   return (
     <Table>
       <TableHeader>
@@ -41,7 +45,7 @@ export function PollOptionsTable({ options }: PollOptionsTable) {
       <TableFooter>
         <TableRow>
           <TableCell colSpan={2}>Total</TableCell>
-          <TableCell className="text-right">70</TableCell>
+          <TableCell className="text-right">{total}</TableCell>
         </TableRow>
       </TableFooter>
     </Table>

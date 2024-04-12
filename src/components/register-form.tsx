@@ -17,6 +17,9 @@ import { Input } from "@/components/ui/input";
 import { useRegister } from "@/hooks/use-register";
 import { Loader2 } from "lucide-react";
 import { CheckLottie } from "./check-lottie";
+import { useLayoutEffect } from "react";
+import { useGetProfile } from "@/hooks/use-get-profile";
+import { redirect } from "next/navigation";
 
 const formSchema = z.object({
   name: z.string().min(2, {
@@ -32,6 +35,8 @@ const formSchema = z.object({
 
 export function RegisterForm() {
   const { register, isPending, status } = useRegister();
+  const { profile, loading } = useGetProfile();
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -52,6 +57,12 @@ export function RegisterForm() {
       console.log(error);
     }
   }
+
+  useLayoutEffect(() => {
+    if (profile && !loading) {
+      redirect("/enquetes");
+    }
+  }, [profile, loading]);
 
   return (
     <>
