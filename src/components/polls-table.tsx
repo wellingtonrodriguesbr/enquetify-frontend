@@ -89,7 +89,7 @@ export function PollsTable({ polls }: PollsTableProps) {
               <TableCell className="flex justify-end pt-6">
                 <Link
                   href={`/enquete/${poll.id}`}
-                  className="flex items-center gap-2 font-medium group"
+                  className="flex items-center gap-2 font-medium group text-nowrap"
                 >
                   Ver detalhes{" "}
                   <ArrowRight className="size-3 group-hover:translate-x-0.5 transition-transform" />
