@@ -15,13 +15,12 @@ import { Dialog } from "./ui/dialog";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import { ArrowRight, LogOut } from "lucide-react";
 import { useGetProfile } from "@/hooks/use-get-profile";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 import { useLocalStorage } from "react-use";
 import { deleteCookie } from "cookies-next";
 
 export function AccountMenu() {
   const path = usePathname();
-  const router = useRouter();
   const [_, setAccessToken] = useLocalStorage("accessToken");
 
   const { profile, loading } = useGetProfile();
@@ -29,7 +28,6 @@ export function AccountMenu() {
   function handleSignOut() {
     setAccessToken("");
     deleteCookie("refreshToken");
-    router.push("/");
   }
 
   return (
