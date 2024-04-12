@@ -14,6 +14,7 @@ interface FetchPollsResponse {
 export function useFetchPolls() {
   const { data, isFetching, error } = useQuery({
     queryKey: ["fetchPolls"],
+    staleTime: Infinity,
     queryFn: async () => {
       const { data } = await api.get<FetchPollsResponse>("/polls");
       return data.polls;
