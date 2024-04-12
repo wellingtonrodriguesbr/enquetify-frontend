@@ -24,6 +24,7 @@ export function useValidatedCode({ code }: { code: string | null }) {
         setTimeout(() => {
           toast.error("Faça login novamente para obter outro código");
         }, 5000);
+        router.push("/entrar");
         console.log(error);
       }
     }
