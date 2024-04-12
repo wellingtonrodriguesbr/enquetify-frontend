@@ -5,7 +5,7 @@ import loading from "@/lib/lotties/loading.json";
 
 export function LoadingLottie() {
   return (
-    <div className="w-[100px] h-[100px]">
+    <div className="w-[300px] h-[300px]">
       <Lottie animationData={loading} loop={true} />
     </div>
   );

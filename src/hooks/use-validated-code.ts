@@ -17,9 +17,8 @@ export function useValidatedCode({ code }: { code: string | null }) {
     if (code) {
       try {
         const { data } = await api.get(`/sessions?code=${code}`);
-        router.push("/enquetes");
         setAccessToken(data.token);
-        return data.token;
+        router.push("/enquetes");
       } catch (error) {
         toast.error("Código de autenticação não encontrado!");
         setTimeout(() => {

@@ -1,4 +1,3 @@
-/* eslint-disable react/no-unescaped-entities */
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -28,6 +27,7 @@ const formSchema = z.object({
 });
 
 export function SignInForm() {
+  const { signIn, isPending, status } = useSignIn();
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -35,20 +35,17 @@ export function SignInForm() {
     },
   });
 
-  const { signIn, isPending, isSuccess } = useSignIn();
-  const params = useSearchParams();
-
-  useValidatedCode({
-    code: params.get("codigo"),
-  });
-
   async function onSubmit(values: z.infer<typeof formSchema>) {
-    await signIn({ email: values.email });
+    try {
+      await signIn({ email: values.email });
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   return (
     <>
-      {!isSuccess ? (
+      {["idle", "error", "pending"].includes(status) ? (
         <div className="w-full flex flex-col items-center gap-12">
           <h1 className="text-2xl md:text-3xl font-semibold">
             Acessar plataforma
@@ -74,7 +71,7 @@ export function SignInForm() {
               />
 
               <Button disabled={isPending} type="submit" className="w-full">
-                {isPending && !isSuccess ? (
+                {isPending ? (
                   <Loader2 className="size-4 animate-spin" />
                 ) : (
                   "Entrar"
@@ -85,11 +82,11 @@ export function SignInForm() {
         </div>
       ) : null}
 
-      {!isPending && isSuccess ? (
+      {status === "success" ? (
         <div className="flex flex-col gap-2 items-center">
           <PaperAirplaneLottie />
           <p className="text-center text-2xl font-medium">
-            Te enviamos o e-mail com o link de acesso a plataforma!
+            Te enviamos um e-mail com o link de acesso a plataforma!
           </p>
           <span className="text-center text-zinc-700 text-sm">
             Corre lá ver! :)

@@ -31,7 +31,7 @@ const formSchema = z.object({
 });
 
 export function RegisterForm() {
-  const { register, isPending, isSuccess } = useRegister();
+  const { register, isPending, status } = useRegister();
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -42,16 +42,20 @@ export function RegisterForm() {
   });
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
-    await register({
-      name: values.name,
-      email: values.email,
-      phone: values.phone,
-    });
+    try {
+      await register({
+        name: values.name,
+        email: values.email,
+        phone: values.phone,
+      });
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   return (
     <>
-      {!isSuccess ? (
+      {["idle", "error", "pending"].includes(status) ? (
         <div className="w-full flex flex-col items-center gap-12">
           <h1 className="text-2xl md:text-3xl font-semibold">
             Faça seu cadastro
@@ -106,7 +110,7 @@ export function RegisterForm() {
                 )}
               />
               <Button disabled={isPending} type="submit" className="w-full">
-                {isPending && !isSuccess ? (
+                {isPending ? (
                   <Loader2 className="size-4 animate-spin" />
                 ) : (
                   "Cadastrar"
@@ -117,7 +121,7 @@ export function RegisterForm() {
         </div>
       ) : null}
 
-      {!isPending && isSuccess ? (
+      {status === "success" ? (
         <div className="flex flex-col gap-2 items-center">
           <CheckLottie />
           <p className="text-center text-2xl font-medium">
