@@ -11,13 +11,13 @@ import { useLayoutEffect } from "react";
 
 export function Polls() {
   const { polls, loading } = useFetchPolls();
-  // const { profile, loading: loadingProfile } = useGetProfile();
+  const { profile, loading: loadingProfile } = useGetProfile();
 
-  // useLayoutEffect(() => {
-  //   if (!profile && !loadingProfile) {
-  //     redirect("/");
-  //   }
-  // }, [profile, loadingProfile]);
+  useLayoutEffect(() => {
+    if (!profile && !loadingProfile) {
+      redirect("/");
+    }
+  }, [profile, loadingProfile]);
 
   return (
     <section className="w-full max-w-screen-xl mx-auto px-4 mt-12 pb-12">
