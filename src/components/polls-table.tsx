@@ -1,5 +1,3 @@
-"use client";
-
 import Link from "next/link";
 import dayjs from "dayjs";
 
@@ -12,27 +10,16 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { ArrowRight, Check, Copy } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { Polls } from "@/hooks/use-fetch-polls";
-import { Button } from "./ui/button";
-import { useState } from "react";
+
+import { CopyLinkButton } from "./copy-link-button";
 
 interface PollsTableProps {
   polls: Polls[];
 }
 
 export function PollsTable({ polls }: PollsTableProps) {
-  const [copyLink, setCopyLink] = useState(false);
-
-  async function handleCopyLink(link: string) {
-    await navigator.clipboard.writeText(link);
-    setCopyLink(true);
-
-    setTimeout(() => {
-      setCopyLink(false);
-    }, 2000);
-  }
-
   return (
     <Table>
       <TableHeader>
@@ -62,28 +49,7 @@ export function PollsTable({ polls }: PollsTableProps) {
                 {dayjs(poll.createdAt).format("DD/MM/YYYY")}
               </TableCell>
               <TableCell className="text-right">
-                <Button
-                  onClick={() =>
-                    handleCopyLink(
-                      `${process.env.NEXT_PUBLIC_WEBSITE_DOMAIN_URL}/enquete/${poll.id}/votos`
-                    )
-                  }
-                  size="sm"
-                  variant="secondary"
-                  className="gap-2"
-                >
-                  {copyLink ? (
-                    <>
-                      Copiado
-                      <Check className="size-4" />
-                    </>
-                  ) : (
-                    <>
-                      Copiar
-                      <Copy className="size-4" />
-                    </>
-                  )}
-                </Button>
+                <CopyLinkButton pollId={poll.id} />
               </TableCell>
               <TableCell className="text-right">10</TableCell>
               <TableCell className="flex justify-end pt-6">
