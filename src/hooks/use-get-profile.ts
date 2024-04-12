@@ -8,8 +8,8 @@ interface GetProfileResponse {
     email: string;
     phone: string;
     status: string;
-    createdAt: string;
-    updatedAt: any;
+    createdAt: Date;
+    updatedAt: Date | null;
   };
 }
 

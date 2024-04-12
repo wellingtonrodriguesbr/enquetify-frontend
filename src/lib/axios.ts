@@ -21,11 +21,11 @@ api.interceptors.response.use(
     const accessToken = localStorage.getItem("accessToken");
     const originalRequest = error.config;
 
-    // if (originalRequest.url === "/token/refresh") {
-    //   window.location.href = "/entrar";
-    //   localStorage.clear();
-    //   return Promise.reject(error);
-    // }
+    if (originalRequest.url === "/token/refresh") {
+      window.location.href = "/entrar";
+      localStorage.clear();
+      return Promise.reject(error);
+    }
 
     if ((error.response && error.response.status !== 401) || !accessToken) {
       return Promise.reject(error);
