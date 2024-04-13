@@ -2,8 +2,8 @@ import Image from "next/image";
 
 export function Footer() {
   return (
-    <footer className="w-full relative md:absolute bottom-0">
-      <div className="flex items-center justify-center">
+    <footer className="mt-12">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 auto-cols-fr place-items-center place-content-center">
         <Image
           src="/illustration-2.svg"
           alt=""
@@ -21,7 +21,7 @@ export function Footer() {
         <Image
           src="/illustration-11.svg"
           alt=""
-          className="hidden xl:block"
+          className="hidden lg:block"
           width={400}
           height={400}
         />

@@ -6,7 +6,7 @@ import { WhatsappIcon } from "./icons/whatsapp-icon";
 
 export function Hero() {
   return (
-    <section className="flex flex-col items-center justify-center mt-12 md:mt-16 px-4">
+    <section className="min-h-full flex flex-col items-center justify-center mt-12 md:mt-16 px-4">
       <HowItWorksDialog />
       <h1 className="max-w-5xl text-center text-3xl leading-tight md:text-6xl md:leading-tight font-bold">
         Impusione o seu negócio tomando as melhores decisões
