@@ -1,67 +1,102 @@
 "use client";
 
-import Link from "next/link";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
 import { Button } from "@/components/ui/button";
-import { Checkbox } from "@/components/ui/checkbox";
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
+  FormMessage,
 } from "@/components/ui/form";
 import { useVoteOnPoll } from "@/hooks/use-vote-on-poll";
+import { useGetPoll } from "@/hooks/use-get-poll";
+import { RadioGroup, RadioGroupItem } from "./ui/radio-group";
+import { Loader2 } from "lucide-react";
+import { CheckLottie } from "./check-lottie";
 
 const FormSchema = z.object({
-  mobile: z.boolean().default(false).optional(),
+  pollOptionId: z.string().min(3, "Selecione uma opção"),
 });
 
 export function VoteOnPollForm({ pollId }: { pollId: string }) {
-  const { voteonPoll, isPending } = useVoteOnPoll({ pollId });
+  const { poll } = useGetPoll({ pollId });
+  const { voteonPoll, isPending, status } = useVoteOnPoll();
 
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
-      mobile: true,
+      pollOptionId: "",
     },
   });
 
-  function onSubmit(data: z.infer<typeof FormSchema>) {}
+  async function onSubmit(data: z.infer<typeof FormSchema>) {
+    try {
+      voteonPoll({ pollId, pollOptionId: data.pollOptionId });
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   return (
-    <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-        <FormField
-          control={form.control}
-          name="mobile"
-          render={({ field }) => (
-            <FormItem className="flex flex-row items-start space-x-3 space-y-0 rounded-md border p-4">
-              <FormControl>
-                <Checkbox
-                  checked={field.value}
-                  onCheckedChange={field.onChange}
-                />
-              </FormControl>
-              <div className="space-y-1 leading-none">
-                <FormLabel>
-                  Use different settings for my mobile devices
-                </FormLabel>
-                <FormDescription>
-                  You can manage your mobile notifications in the page.
-                </FormDescription>
-              </div>
-            </FormItem>
-          )}
-        />
-        <Button type="submit" className="w-full">
-          Confirmar voto
-        </Button>
-      </form>
-    </Form>
+    <section className="flex flex-col gap-12">
+      {status === "success" ? (
+        <div className="flex flex-col gap-4 items-center">
+          <CheckLottie />
+          <strong className="text-xl">Voto registrado com sucesso!</strong>
+          <span className="text-center">
+            Obrigado por participar, sua opinião é muito valiosa para nós.
+          </span>
+        </div>
+      ) : (
+        <>
+          <h1 className="text-3xl font-semibold">{poll?.title}</h1>
+          <Form {...form}>
+            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-12">
+              <FormField
+                control={form.control}
+                name="pollOptionId"
+                render={({ field }) => (
+                  <FormItem className="flex flex-row items-start space-x-3 space-y-0 border rounded-md p-4">
+                    <FormControl>
+                      <RadioGroup
+                        onValueChange={field.onChange}
+                        className="w-full flex flex-col gap-12"
+                      >
+                        {poll?.options.map((option) => (
+                          <FormItem
+                            key={option.id}
+                            className="flex items-center space-x-3 space-y-0"
+                          >
+                            <FormControl>
+                              <RadioGroupItem value={option.id} />
+                            </FormControl>
+                            <FormLabel className="font-normal cursor-pointer">
+                              {option.title}
+                            </FormLabel>
+                          </FormItem>
+                        ))}
+                      </RadioGroup>
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <Button disabled={isPending} type="submit" className="w-full">
+                {isPending ? (
+                  <Loader2 className="size-4 animate-spin" />
+                ) : (
+                  "Confirmar voto"
+                )}
+              </Button>
+            </form>
+          </Form>
+        </>
+      )}
+    </section>
   );
 }

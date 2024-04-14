@@ -1,14 +1,30 @@
 import { api } from "@/lib/axios";
 import { useMutation } from "@tanstack/react-query";
+import { AxiosError } from "axios";
+import { toast } from "sonner";
 
-export function useVoteOnPoll({ pollId }: { pollId: string }) {
-  const { mutateAsync: voteonPoll, isPending } = useMutation({
-    mutationFn: () => handleVoteOnPoll(pollId),
+interface VoteOnPollRequest {
+  pollId: string;
+  pollOptionId: string;
+}
+
+export function useVoteOnPoll() {
+  const {
+    mutateAsync: voteonPoll,
+    isPending,
+    status,
+  } = useMutation({
+    mutationFn: handleVoteOnPoll,
+    onError: (error: AxiosError) => {
+      if (error.response?.status === 409) {
+        toast.error("Você já votou nesta enquete!");
+      }
+    },
   });
 
-  async function handleVoteOnPoll(pollId: string) {
-    await api.post(`/polls/${pollId}/votes`);
+  async function handleVoteOnPoll({ pollId, pollOptionId }: VoteOnPollRequest) {
+    await api.post(`/polls/${pollId}/votes`, { pollOptionId });
   }
 
-  return { voteonPoll, isPending };
+  return { voteonPoll, isPending, status };
 }

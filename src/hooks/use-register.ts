@@ -25,8 +25,6 @@ export function useRegister() {
     },
   });
 
-  console.log("STATUS", status);
-
   async function handleRegister({ name, email, phone }: Register) {
     await api.post("/users", { name, email, phone });
   }

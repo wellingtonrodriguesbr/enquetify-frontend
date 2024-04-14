@@ -58,7 +58,7 @@ export function PollsTable({ polls }: PollsTableProps) {
               <TableCell className="text-right">{poll.votes.length}</TableCell>
               <TableCell className="flex justify-end pt-6">
                 <Link
-                  href={`/enquete/${poll.id}`}
+                  href={`/enquetes/${poll.id}`}
                   className="flex items-center gap-2 font-medium group text-nowrap"
                 >
                   Ver detalhes{" "}
