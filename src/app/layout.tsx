@@ -1,13 +1,13 @@
 import type { Metadata } from "next";
-import { Inter, Kalam } from "next/font/google";
+import { Bricolage_Grotesque, Inter, Kalam, Poppins } from "next/font/google";
 import { cn } from "@/lib/utils";
 import "./globals.css";
 import { ReactQueryProvider } from "@/providers/react-query-provider";
 import { Toaster } from "@/components/ui/sonner";
 
-const sans = Inter({
+const sans = Bricolage_Grotesque({
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700", "800", "900"],
+  weight: ["400", "500", "600", "700", "800"],
   variable: "--font-sans",
 });
 
