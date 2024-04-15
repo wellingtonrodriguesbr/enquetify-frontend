@@ -16,7 +16,9 @@ export function PollDetails({ pollId }: { pollId: string }) {
     votes: 0,
   });
 
-  const ws = new WebSocket(`ws://localhost:3333/polls/${pollId}/results`);
+  const ws = new WebSocket(
+    `ws://${process.env.NEXT_PUBLIC_WEBSITE_DOMAIN_URL}/polls/${pollId}/results`
+  );
 
   useEffect(() => {
     ws.addEventListener("open", function (event) {
