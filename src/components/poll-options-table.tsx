@@ -11,9 +11,14 @@ import { Option } from "@/hooks/use-get-poll";
 
 interface PollOptionsTable {
   options: Option[];
+  votesRealTime: { pollOptionId: string; votes: number };
 }
 
-export function PollOptionsTable({ options }: PollOptionsTable) {
+export function PollOptionsTable({ options, votesRealTime }: PollOptionsTable) {
+  const findPollOption = options.find(
+    (option) => option.id === votesRealTime.pollOptionId
+  );
+
   const total = options.reduce((acc, currentValue) => {
     return (acc += currentValue.score);
   }, 0);
@@ -38,7 +43,11 @@ export function PollOptionsTable({ options }: PollOptionsTable) {
                 {option.id}
               </TableCell>
               <TableCell className="text-nowrap">{option.title}</TableCell>
-              <TableCell className="text-right">{option.score}</TableCell>
+              <TableCell className="text-right">
+                {option.id === findPollOption?.id
+                  ? votesRealTime.votes
+                  : option.score}
+              </TableCell>
             </TableRow>
           ))}
       </TableBody>

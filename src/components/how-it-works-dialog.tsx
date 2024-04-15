@@ -32,7 +32,6 @@ export function HowItWorksDialog() {
           <DialogTitle className="text-2xl font-bold">
             Veja como é fácil
           </DialogTitle>
-          <DialogDescription>Todo mundo sai ganhando</DialogDescription>
         </DialogHeader>
         <div className="w-full h-36 md:h-48 border rounded-sm flex justify-center items-center">
           <p>Video de explicação</p>
