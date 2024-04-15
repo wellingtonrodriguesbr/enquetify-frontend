@@ -18,6 +18,7 @@ export function useGetProfile() {
     queryKey: ["profile"],
     queryFn: getProfile,
     staleTime: Infinity,
+    enabled: true,
   });
 
   async function getProfile() {

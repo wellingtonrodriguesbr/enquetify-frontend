@@ -25,7 +25,7 @@ export function CopyLinkButton({ pollId }: CopyLinkButtonProps) {
       onClick={() => handleCopyLink(pollId)}
       size="sm"
       variant="secondary"
-      className="gap-2"
+      className="gap-2 hover:brightness-95"
     >
       {copyLink ? (
         <>

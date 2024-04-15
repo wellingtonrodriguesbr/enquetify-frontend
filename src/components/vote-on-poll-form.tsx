@@ -18,13 +18,14 @@ import { useGetPoll } from "@/hooks/use-get-poll";
 import { RadioGroup, RadioGroupItem } from "./ui/radio-group";
 import { Loader2 } from "lucide-react";
 import { CheckLottie } from "./check-lottie";
+import { Skeleton } from "./ui/skeleton";
 
 const FormSchema = z.object({
   pollOptionId: z.string().min(3, "Selecione uma opção"),
 });
 
 export function VoteOnPollForm({ pollId }: { pollId: string }) {
-  const { poll } = useGetPoll({ pollId });
+  const { poll, loading } = useGetPoll({ pollId });
   const { voteonPoll, isPending, status } = useVoteOnPoll();
 
   const form = useForm<z.infer<typeof FormSchema>>({
@@ -54,47 +55,61 @@ export function VoteOnPollForm({ pollId }: { pollId: string }) {
         </div>
       ) : (
         <>
-          <h1 className="text-3xl font-semibold">{poll?.title}</h1>
-          <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-12">
-              <FormField
-                control={form.control}
-                name="pollOptionId"
-                render={({ field }) => (
-                  <FormItem className="flex flex-row items-start space-x-3 space-y-0 border rounded-md p-4">
-                    <FormControl>
-                      <RadioGroup
-                        onValueChange={field.onChange}
-                        className="w-full flex flex-col gap-12"
-                      >
-                        {poll?.options.map((option) => (
-                          <FormItem
-                            key={option.id}
-                            className="flex items-center space-x-3 space-y-0"
-                          >
-                            <FormControl>
-                              <RadioGroupItem value={option.id} />
-                            </FormControl>
-                            <FormLabel className="font-normal cursor-pointer">
-                              {option.title}
-                            </FormLabel>
-                          </FormItem>
-                        ))}
-                      </RadioGroup>
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <Button disabled={isPending} type="submit" className="w-full">
-                {isPending ? (
-                  <Loader2 className="size-4 animate-spin" />
-                ) : (
-                  "Confirmar voto"
-                )}
-              </Button>
-            </form>
-          </Form>
+          {loading ? (
+            <Skeleton className="h-10 w-96" />
+          ) : (
+            <h1 className="text-3xl font-semibold">{poll?.title}</h1>
+          )}
+          {loading ? (
+            <div className="space-y-12">
+              <Skeleton className="w-full h-[450px]" />
+              <Skeleton className="h-10 w-full" />
+            </div>
+          ) : (
+            <Form {...form}>
+              <form
+                onSubmit={form.handleSubmit(onSubmit)}
+                className="space-y-12"
+              >
+                <FormField
+                  control={form.control}
+                  name="pollOptionId"
+                  render={({ field }) => (
+                    <FormItem className="flex flex-row items-start space-x-3 space-y-0 border rounded-md p-4">
+                      <FormControl>
+                        <RadioGroup
+                          onValueChange={field.onChange}
+                          className="w-full flex flex-col gap-12"
+                        >
+                          {poll?.options.map((option) => (
+                            <FormItem
+                              key={option.id}
+                              className="flex items-center space-x-3 space-y-0"
+                            >
+                              <FormControl>
+                                <RadioGroupItem value={option.id} />
+                              </FormControl>
+                              <FormLabel className="font-normal cursor-pointer">
+                                {option.title}
+                              </FormLabel>
+                            </FormItem>
+                          ))}
+                        </RadioGroup>
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <Button disabled={isPending} type="submit" className="w-full">
+                  {isPending ? (
+                    <Loader2 className="size-4 animate-spin" />
+                  ) : (
+                    "Confirmar voto"
+                  )}
+                </Button>
+              </form>
+            </Form>
+          )}
         </>
       )}
     </section>
