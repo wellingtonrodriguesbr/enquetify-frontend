@@ -17,7 +17,7 @@ export function PollDetails({ pollId }: { pollId: string }) {
   });
 
   const ws = new WebSocket(
-    `wss://${process.env.NEXT_PUBLIC_WEBSITE_DOMAIN_URL}/polls/${pollId}/results`
+    `${process.env.NEXT_PUBLIC_WEBSOCKET_PROTOCOL}${process.env.NEXT_PUBLIC_WEBSOCKET_DOMAIN_URL}/polls/${pollId}/results`
   );
 
   useEffect(() => {
