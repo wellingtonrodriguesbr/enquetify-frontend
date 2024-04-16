@@ -8,20 +8,29 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { Option } from "@/hooks/use-get-poll";
+import { useEffect, useState } from "react";
 
 interface PollOptionsTable {
   options: Option[];
-  votesRealTime: { pollOptionId: string; votes: number };
+  pollOptionId: string;
+  votes: number;
 }
 
-export function PollOptionsTable({ options, votesRealTime }: PollOptionsTable) {
-  const findPollOption = options.find(
-    (option) => option.id === votesRealTime.pollOptionId
-  );
+export function PollOptionsTable({
+  options,
+  pollOptionId,
+  votes,
+}: PollOptionsTable) {
+  const [currentTotal, setCurrentTotal] = useState(0);
+  const findPollOption = options.find((option) => option.id === pollOptionId);
 
-  const total = options.reduce((acc, currentValue) => {
-    return (acc += currentValue.score);
-  }, 0);
+  useEffect(() => {
+    const total = options.reduce((acc, currentValue) => {
+      return (acc += currentValue.score);
+    }, 0);
+
+    setCurrentTotal(total);
+  }, [options, findPollOption?.score]);
 
   return (
     <Table>
@@ -44,9 +53,7 @@ export function PollOptionsTable({ options, votesRealTime }: PollOptionsTable) {
               </TableCell>
               <TableCell className="text-nowrap">{option.title}</TableCell>
               <TableCell className="text-right">
-                {option.id === findPollOption?.id
-                  ? votesRealTime.votes
-                  : option.score}
+                {option.id === findPollOption?.id ? votes : option.score}
               </TableCell>
             </TableRow>
           ))}
@@ -54,7 +61,7 @@ export function PollOptionsTable({ options, votesRealTime }: PollOptionsTable) {
       <TableFooter>
         <TableRow>
           <TableCell colSpan={2}>Total</TableCell>
-          <TableCell className="text-right">{total}</TableCell>
+          <TableCell className="text-right">{currentTotal}</TableCell>
         </TableRow>
       </TableFooter>
     </Table>
