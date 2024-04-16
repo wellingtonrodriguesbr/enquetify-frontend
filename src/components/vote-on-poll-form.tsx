@@ -60,85 +60,87 @@ export function VoteOnPollForm({ pollId }: { pollId: string }) {
   };
 
   return (
-    <section className="flex flex-col gap-12">
+    <>
       <Script
         src={`https://www.google.com/recaptcha/api.js?render=${process.env
           .NEXT_PUBLIC_RECAPTCHA_SITE_KEY!}`}
       />
-      {status === "success" ? (
-        <div className="flex flex-col gap-4 items-center">
-          <CheckLottie />
-          <strong className="text-xl">Voto registrado com sucesso!</strong>
-          <span className="text-center">
-            Obrigado por participar, sua opinião é muito valiosa para nós.
-          </span>
-        </div>
-      ) : (
-        <>
-          {loading ? (
-            <Skeleton className="h-10 w-96" />
-          ) : (
-            <h1 className="text-3xl font-semibold">{poll?.title}</h1>
-          )}
-          {loading ? (
-            <div className="space-y-12">
-              <Skeleton className="w-full h-[450px]" />
-              <Skeleton className="h-10 w-full" />
-            </div>
-          ) : (
-            <Form {...form}>
-              <form
-                onSubmit={form.handleSubmit(onSubmit)}
-                className="space-y-12"
-              >
-                <FormField
-                  control={form.control}
-                  name="pollOptionId"
-                  render={({ field }) => (
-                    <FormItem className="flex flex-row items-start space-x-3 space-y-0 border rounded-md p-4">
-                      <FormControl>
-                        <RadioGroup
-                          onValueChange={field.onChange}
-                          className="w-full flex flex-col gap-12"
-                        >
-                          {poll?.options.map((option) => (
-                            <FormItem
-                              key={option.id}
-                              className="flex items-center space-x-3 space-y-0"
-                            >
-                              <FormControl>
-                                <RadioGroupItem value={option.id} />
-                              </FormControl>
-                              <FormLabel className="font-normal cursor-pointer">
-                                {option.title}
-                              </FormLabel>
-                            </FormItem>
-                          ))}
-                        </RadioGroup>
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-
-                <Recaptcha onChange={handleRecaptchaChange} />
-
-                <Button
-                  disabled={isPending || !isRecaptchaVerified}
-                  type="submit"
-                  className="w-full"
+      <section className="flex flex-col gap-12">
+        {status === "success" ? (
+          <div className="flex flex-col gap-4 items-center">
+            <CheckLottie />
+            <strong className="text-xl">Voto registrado com sucesso!</strong>
+            <span className="text-center">
+              Obrigado por participar, sua opinião é muito valiosa para nós.
+            </span>
+          </div>
+        ) : (
+          <>
+            {loading ? (
+              <Skeleton className="h-10 w-96" />
+            ) : (
+              <h1 className="text-3xl font-semibold">{poll?.title}</h1>
+            )}
+            {loading ? (
+              <div className="space-y-12">
+                <Skeleton className="w-full h-[450px]" />
+                <Skeleton className="h-10 w-full" />
+              </div>
+            ) : (
+              <Form {...form}>
+                <form
+                  onSubmit={form.handleSubmit(onSubmit)}
+                  className="space-y-12"
                 >
-                  {isPending ? (
-                    <Loader2 className="size-4 animate-spin" />
-                  ) : (
-                    "Confirmar voto"
-                  )}
-                </Button>
-              </form>
-            </Form>
-          )}
-        </>
-      )}
-    </section>
+                  <FormField
+                    control={form.control}
+                    name="pollOptionId"
+                    render={({ field }) => (
+                      <FormItem className="flex flex-row items-start space-x-3 space-y-0 border rounded-md p-4">
+                        <FormControl>
+                          <RadioGroup
+                            onValueChange={field.onChange}
+                            className="w-full flex flex-col gap-12"
+                          >
+                            {poll?.options.map((option) => (
+                              <FormItem
+                                key={option.id}
+                                className="flex items-center space-x-3 space-y-0"
+                              >
+                                <FormControl>
+                                  <RadioGroupItem value={option.id} />
+                                </FormControl>
+                                <FormLabel className="font-normal cursor-pointer">
+                                  {option.title}
+                                </FormLabel>
+                              </FormItem>
+                            ))}
+                          </RadioGroup>
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+
+                  <Recaptcha onChange={handleRecaptchaChange} />
+
+                  <Button
+                    disabled={isPending || !isRecaptchaVerified}
+                    type="submit"
+                    className="w-full"
+                  >
+                    {isPending ? (
+                      <Loader2 className="size-4 animate-spin" />
+                    ) : (
+                      "Confirmar voto"
+                    )}
+                  </Button>
+                </form>
+              </Form>
+            )}
+          </>
+        )}
+      </section>
+    </>
   );
 }
