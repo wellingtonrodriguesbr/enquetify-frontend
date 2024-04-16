@@ -8,6 +8,7 @@ import { Frown } from "lucide-react";
 import { redirect } from "next/navigation";
 import { useGetProfile } from "@/hooks/use-get-profile";
 import { useLayoutEffect } from "react";
+import { InsightsAIDialog } from "./insights-ai-dialog";
 
 export function Polls() {
   const { polls, loading } = useFetchPolls();
@@ -23,7 +24,10 @@ export function Polls() {
     <section className="w-full max-w-screen-xl mx-auto px-4 mt-12 pb-12">
       <div className="flex flex-col md:flex-row justify-between items-center gap-6 mb-12">
         <h1 className="text-2xl  font-bold">Todas as suas enquetes</h1>
-        <CreateNewPollDialog />
+        <div className="w-full md:w-fit flex flex-col md:flex-row items-center gap-2">
+          <CreateNewPollDialog />
+          <InsightsAIDialog />
+        </div>
       </div>
       {loading ? <PollsSkeletetonTable /> : null}
       {!loading && polls.length === 0 ? (
