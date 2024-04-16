@@ -21,6 +21,7 @@ export const metadata: Metadata = {
   title: "Pollify | Crie e compartilhe enquetes gratuitamente",
   description:
     "Crie e compartilhe enquetes com facilidade, garantindo decisões validadas por seus clientes e colaboradores para descobrir, avaliar, medir e engajar. Impulsionando o crescimento do seu negócio.",
+  metadataBase: new URL("https://pollify.app"),
 };
 
 export default function RootLayout({
