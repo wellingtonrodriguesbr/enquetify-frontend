@@ -19,12 +19,17 @@ import { RadioGroup, RadioGroupItem } from "./ui/radio-group";
 import { Loader2 } from "lucide-react";
 import { CheckLottie } from "./check-lottie";
 import { Skeleton } from "./ui/skeleton";
+import { Recaptcha } from "./recaptcha";
+import { useState } from "react";
+import Script from "next/script";
 
 const FormSchema = z.object({
   pollOptionId: z.string().min(3, "Selecione uma opção"),
 });
 
 export function VoteOnPollForm({ pollId }: { pollId: string }) {
+  const [isRecaptchaVerified, setIsRecaptchaVerified] = useState(false);
+
   const { poll, loading } = useGetPoll({ pollId });
   const { voteonPoll, isPending, status } = useVoteOnPoll();
 
@@ -43,8 +48,23 @@ export function VoteOnPollForm({ pollId }: { pollId: string }) {
     }
   }
 
+  const handleRecaptchaChange = async (token: string | null) => {
+    if (token === null) {
+      return alert("Token inválido!");
+    }
+
+    const response = await fetch(`/api/recaptcha?token=${token}`, {
+      method: "POST",
+    });
+    setIsRecaptchaVerified(!!response);
+  };
+
   return (
     <section className="flex flex-col gap-12">
+      <Script
+        src={`https://www.google.com/recaptcha/api.js?render=${process.env
+          .NEXT_PUBLIC_RECAPTCHA_SITE_KEY!}`}
+      />
       {status === "success" ? (
         <div className="flex flex-col gap-4 items-center">
           <CheckLottie />
@@ -100,7 +120,14 @@ export function VoteOnPollForm({ pollId }: { pollId: string }) {
                     </FormItem>
                   )}
                 />
-                <Button disabled={isPending} type="submit" className="w-full">
+
+                <Recaptcha onChange={handleRecaptchaChange} />
+
+                <Button
+                  disabled={isPending || !isRecaptchaVerified}
+                  type="submit"
+                  className="w-full"
+                >
                   {isPending ? (
                     <Loader2 className="size-4 animate-spin" />
                   ) : (
