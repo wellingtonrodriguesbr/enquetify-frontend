@@ -62,7 +62,7 @@ export function InsightsAIDialog({
           />
 
           <Textarea
-            className="h-full min-h-[450px] resize-none p-4 leading-relaxed"
+            className="h-full min-h-[250px] md:min-h-[450px] resize-none p-4 leading-relaxed"
             // rows={8}
             placeholder={
               isLoading ? "IA está escrevendo..." : "Resultado gerado pela IA.."

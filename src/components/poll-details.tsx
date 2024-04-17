@@ -24,9 +24,12 @@ export function PollDetails({ pollId }: { pollId: string }) {
         Voltar
       </Link>
       {loading ? (
-        <Skeleton className="w-[300px] h-[32px] rounded-md mb-12" />
+        <div className="space-y-3 mb-12">
+          <Skeleton className=" w-full md:w-[300px] h-[32px] rounded-md" />
+          <Skeleton className=" w-full md:w-[300px] h-[38px] rounded-md" />
+        </div>
       ) : (
-        <div className="flex items-center justify-between mb-12 ">
+        <div className="flex flex-col md:flex-row gap-3 items-center justify-between mb-12 ">
           <strong className="block text-2xl font-semibold">
             Enquete: {poll?.title}
           </strong>
