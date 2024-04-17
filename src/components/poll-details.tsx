@@ -8,6 +8,7 @@ import { PollOptionsTable } from "./poll-options-table";
 import { PollsOptionsSkeletetonTable } from "./polls-options-skeleton-table";
 import { Skeleton } from "./ui/skeleton";
 import { useWSResults } from "@/hooks/use-ws-results";
+import { InsightsAIDialog } from "./insights-ai-dialog";
 
 export function PollDetails({ pollId }: { pollId: string }) {
   const { poll, loading } = useGetPoll({ pollId });
@@ -25,9 +26,15 @@ export function PollDetails({ pollId }: { pollId: string }) {
       {loading ? (
         <Skeleton className="w-[300px] h-[32px] rounded-md mb-12" />
       ) : (
-        <strong className="block text-2xl mb-12 font-semibold">
-          Enquete: {poll?.title}
-        </strong>
+        <div className="flex items-center justify-between mb-12 ">
+          <strong className="block text-2xl font-semibold">
+            Enquete: {poll?.title}
+          </strong>
+          <InsightsAIDialog
+            pollName={poll?.title ?? ""}
+            pollOptions={poll?.options ?? []}
+          />
+        </div>
       )}
       {loading ? (
         <PollsOptionsSkeletetonTable />
