@@ -35,7 +35,7 @@ export function InsightsAIDialog({
     })
     .join(" ");
 
-  const prompt = `Eu criei uma enquete com o seguinte tema: "${pollName}", dentro dessa enquete havia ${pollOptions.length} opções: ${options}. Respectivamente, teve as seguintes pontuações ${score}. Com base nessas informações liste algumas algumas sugestões para que eu possa trabalhar em cima desses dados. Se não conseguir gerar uma sugestão,retorne dizendo que houve uma falha e que é para tentar novamente.`;
+  const prompt = `Eu criei uma enquete com o seguinte tema: "${pollName}", dentro dessa enquete havia ${pollOptions.length} opções: ${options}. Respectivamente, teve as seguintes pontuações ${score}. Com base nessas informações liste algumas algumas sugestões para que eu possa trabalhar em cima desses dados. Se não conseguir gerar uma sugestão, retorne dizendo que houve uma falha e que é para tentar novamente.`;
 
   const {
     input,
