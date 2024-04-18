@@ -48,7 +48,12 @@ export function PollsTable({ polls }: PollsTableProps) {
               <TableCell className="text-nowrap font-medium">
                 {poll.id}
               </TableCell>
-              <TableCell className="text-nowrap">{poll.title}</TableCell>
+              <TableCell
+                title={poll.title}
+                className="max-w-[400px] text-nowrap text-ellipsis overflow-hidden"
+              >
+                {poll.title}
+              </TableCell>
               <TableCell className="text-nowrap">
                 {dayjs(poll.createdAt).format("DD/MM/YYYY")}
               </TableCell>

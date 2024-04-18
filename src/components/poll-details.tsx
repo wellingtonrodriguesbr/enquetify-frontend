@@ -30,8 +30,8 @@ export function PollDetails({ pollId }: { pollId: string }) {
         </div>
       ) : (
         <div className="flex flex-col md:flex-row gap-3 items-center justify-between mb-12 ">
-          <strong className="block text-2xl font-semibold">
-            Enquete: {poll?.title}
+          <strong className="max-w-3xl block text-2xl font-semibold">
+            Enquete: <span className="text-zinc-500">{poll?.title}</span>
           </strong>
           <InsightsAIDialog
             pollName={poll?.title ?? ""}

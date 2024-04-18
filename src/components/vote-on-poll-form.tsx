@@ -90,22 +90,22 @@ export function VoteOnPollForm({ pollId }: { pollId: string }) {
               <Form {...form}>
                 <form
                   onSubmit={form.handleSubmit(onSubmit)}
-                  className="space-y-12"
+                  className="flex flex-col items-center gap-12"
                 >
                   <FormField
                     control={form.control}
                     name="pollOptionId"
                     render={({ field }) => (
-                      <FormItem className="flex flex-row items-start space-x-3 space-y-0 border rounded-md p-4">
+                      <FormItem className="w-full flex flex-row items-start space-y-0">
                         <FormControl>
                           <RadioGroup
                             onValueChange={field.onChange}
-                            className="w-full flex flex-col gap-12"
+                            className="w-full flex flex-col gap-4"
                           >
                             {poll?.options.map((option) => (
                               <FormItem
                                 key={option.id}
-                                className="flex items-center space-x-3 space-y-0"
+                                className="flex items-center space-x-2 space-y-0 border rounded-md p-4"
                               >
                                 <FormControl>
                                   <RadioGroupItem value={option.id} />
