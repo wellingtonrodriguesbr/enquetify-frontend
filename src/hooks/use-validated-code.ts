@@ -21,7 +21,6 @@ export function useValidatedCode({ code }: { code: string | null }) {
         router.push("/enquetes");
         return data.token;
       } catch (error) {
-        router.push("/entrar");
         toast.error("Código de autenticação não encontrado!");
         setTimeout(() => {
           toast.error("Faça login novamente para obter outro código");

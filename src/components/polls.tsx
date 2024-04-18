@@ -6,9 +6,20 @@ import { PollsSkeletetonTable } from "./polls-skeleton-table";
 import { PollsTable } from "./polls-table";
 import { Frown } from "lucide-react";
 import { AskForSuggestionsForNewPollsForAIDialog } from "./ask-for-suggestions-for-new-polls-for-ai-dialog";
+import { useGetProfile } from "@/hooks/use-get-profile";
+import { useEffect } from "react";
+import { useRouter } from "next/navigation";
 
 export function Polls() {
+  const router = useRouter();
   const { polls, loading } = useFetchPolls();
+  const { status } = useGetProfile();
+
+  useEffect(() => {
+    if (status === "error") {
+      router.push("/");
+    }
+  }, [status, router]);
 
   return (
     <section className="w-full max-w-screen-xl mx-auto px-4 mt-12 pb-12">

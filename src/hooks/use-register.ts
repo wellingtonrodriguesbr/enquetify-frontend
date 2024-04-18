@@ -17,7 +17,7 @@ export function useRegister() {
   } = useMutation({
     mutationFn: handleRegister,
     onError: (error: AxiosError) => {
-      if (error.response?.status === 400) {
+      if (error.response?.status === 409) {
         toast.error("Já existe uma conta com este e-mail");
       } else {
         toast.error("Falha ao registrar usuário, tente novamente!");

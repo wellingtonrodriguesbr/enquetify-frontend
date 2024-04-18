@@ -14,7 +14,7 @@ interface GetProfileResponse {
 }
 
 export function useGetProfile() {
-  const { data, isFetching } = useQuery({
+  const { data, isFetching, status } = useQuery({
     queryKey: ["profile"],
     queryFn: getProfile,
     staleTime: Infinity,
@@ -22,10 +22,13 @@ export function useGetProfile() {
   });
 
   async function getProfile() {
-    const { data } = await api.get<GetProfileResponse>("/me");
-
-    return data.user;
+    try {
+      const { data } = await api.get<GetProfileResponse>("/me");
+      return data.user;
+    } catch (error) {
+      console.log(error);
+    }
   }
 
-  return { profile: data, loading: isFetching };
+  return { profile: data, loading: isFetching, status };
 }
