@@ -5,20 +5,10 @@ import { CreateNewPollDialog } from "./create-new-poll-dialog";
 import { PollsSkeletetonTable } from "./polls-skeleton-table";
 import { PollsTable } from "./polls-table";
 import { Frown } from "lucide-react";
-import { redirect } from "next/navigation";
-import { useGetProfile } from "@/hooks/use-get-profile";
-import { useLayoutEffect } from "react";
 import { AskForSuggestionsForNewPollsForAIDialog } from "./ask-for-suggestions-for-new-polls-for-ai-dialog";
 
 export function Polls() {
   const { polls, loading } = useFetchPolls();
-  const { profile, loading: loadingProfile } = useGetProfile();
-
-  useLayoutEffect(() => {
-    if (!profile && !loadingProfile) {
-      redirect("/");
-    }
-  }, [profile, loadingProfile]);
 
   return (
     <section className="w-full max-w-screen-xl mx-auto px-4 mt-12 pb-12">

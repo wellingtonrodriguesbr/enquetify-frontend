@@ -16,7 +16,7 @@ export function useValidatedCode({ code }: { code: string | null }) {
   async function handleValidatedCode() {
     if (code) {
       try {
-        const { data } = await api.get(`/sessions?code=${code}`);
+        const { data } = await api.post(`/sessions?code=${code}`);
         setAccessToken(data.token);
         router.push("/enquetes");
         return data.token;
