@@ -47,7 +47,7 @@ export function AskForSuggestionsForNewPollsForAIDialog() {
           </DialogDescription>
           <Popover>
             <PopoverTrigger asChild>
-              <Button size="sm" variant="ghost" className="w-fit">
+              <Button size="sm" variant="secondary" className="w-fit">
                 Veja o que editar aqui
               </Button>
             </PopoverTrigger>
