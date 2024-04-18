@@ -38,7 +38,7 @@ export function AskForSuggestionsForNewPollsForAIDialog() {
           <WandSparkles className="size-4" /> Pedir sugestões para IA
         </Button>
       </DialogTrigger>
-      <DialogContent className="w-full h-fit max-w-[350px] md:max-w-[600px] rounded-md flex flex-col gap-5">
+      <DialogContent className="w-full h-fit max-h-[90vh] max-w-[350px] md:max-w-[600px] rounded-md flex flex-col gap-5">
         <DialogHeader className="text-left">
           <DialogTitle className="text-xl">Sugestões da nossa IA</DialogTitle>
           <DialogDescription>
@@ -77,14 +77,6 @@ export function AskForSuggestionsForNewPollsForAIDialog() {
         </DialogHeader>
 
         <form onSubmit={handleSubmit} className="flex flex-col gap-2 mt-2">
-          <Textarea
-            className="min-h-[300px] md:min-h-[150px]"
-            placeholder="Qual o ramo do seu negócio?"
-            value={input}
-            onChange={handleInputChange}
-            required
-          />
-
           {isLoading || completion ? (
             <Textarea
               className="h-full min-h-[250px] md:min-h-[450px] resize-none p-4 leading-relaxed"
@@ -97,7 +89,15 @@ export function AskForSuggestionsForNewPollsForAIDialog() {
               value={completion}
               readOnly
             />
-          ) : null}
+          ) : (
+            <Textarea
+              className="min-h-[300px] md:min-h-[150px]"
+              placeholder="Qual o ramo do seu negócio?"
+              value={input}
+              onChange={handleInputChange}
+              required
+            />
+          )}
           <Button
             disabled={isLoading || !!completion}
             type="submit"
