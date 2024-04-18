@@ -23,7 +23,19 @@ export function InsightsAIDialog({
   pollName,
   pollOptions,
 }: InsightsAIDialogProps) {
-  const prompt = `Eu criei uma enquete com o seguinte tema: "Como você vê o meu trabalho", dentro dessa enquete havia 3 opções: 1. Trabalho decente, 2. trabalho meia boca, 3. acho ruim seu trabalho. A opção 1 teve 34 votos, a opção 2 teve 12 e a opção 3 teve 40. Com base nessas informações liste algumas algumas sugestões para que eu possa trabalhar ou ser melhor visto, pule uma linha entre cada um dos itens.`;
+  const options = pollOptions
+    .map((option, index) => {
+      return `${index + 1}. ${option.title}`;
+    })
+    .join(" ");
+
+  const score = pollOptions
+    .map((option, index) => {
+      return `${index + 1}. ${option.score}`;
+    })
+    .join(" ");
+
+  const prompt = `Eu criei uma enquete com o seguinte tema: "${pollName}", dentro dessa enquete havia ${pollOptions.length} opções: ${options}. Respectivamente, teve as seguintes pontuações ${score}. Com base nessas informações liste algumas algumas sugestões para que eu possa trabalhar em cima desses dados. Se não conseguir gerar uma sugestão,retorne dizendo que houve uma falha e que é para tentar novamente.`;
 
   const {
     input,
