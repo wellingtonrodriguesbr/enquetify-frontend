@@ -12,13 +12,24 @@ import {
 import { useCompletion } from "ai/react";
 import { Textarea } from "./ui/textarea";
 import { WandSparkles } from "lucide-react";
-import { Input } from "./ui/input";
+import { useEffect } from "react";
+import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover";
 
 export function AskForSuggestionsForNewPollsForAIDialog() {
-  const prompt = `Eu criei uma enquete com o seguinte tema: "Como você vê o meu trabalho", dentro dessa enquete havia 3 opções: 1. Trabalho decente, 2. trabalho meia boca, 3. acho ruim seu trabalho. A opção 1 teve 34 votos, a opção 2 teve 12 e a opção 3 teve 40. Com base nessas informações liste algumas algumas sugestões para que eu possa trabalhar ou ser melhor visto, pule uma linha entre cada um dos itens.`;
+  const prompt = `Eu sou um COLOQUE_SUA_POSIÇÃO_AQUI no setor de COLOQUE_SETOR_QUE_ATUA_AQUI e gostaria de criar uma enquete de apenas uma pergunta, mas com algumas opções bem estratégicas para meus COLOQUE_PARA_QUEM_ESTA_DESTINADO_AQUI respondessem o que estão achando do  COLOQUE_O_QUE_ESTA_PESQUISANDO_AQUI, me liste algumas sugestões com que cada enquete tenha 3 opções.`;
 
-  const { input, handleInputChange, handleSubmit, completion, isLoading } =
-    useCompletion();
+  const {
+    input,
+    setInput,
+    handleInputChange,
+    handleSubmit,
+    completion,
+    isLoading,
+  } = useCompletion();
+
+  useEffect(() => {
+    setInput(prompt);
+  }, []);
 
   return (
     <Dialog>
@@ -31,12 +42,43 @@ export function AskForSuggestionsForNewPollsForAIDialog() {
         <DialogHeader className="text-left">
           <DialogTitle className="text-xl">Sugestões da nossa IA</DialogTitle>
           <DialogDescription>
-            Preencha o campo abaixo que nossa IA irá sugerir novas enquetes
+            Aqui está uma sugestão de prompt que será enviada para IA, mude se
+            achar necessário.
           </DialogDescription>
+          <Popover>
+            <PopoverTrigger asChild>
+              <Button size="sm" variant="ghost" className="w-fit">
+                Veja o que editar aqui
+              </Button>
+            </PopoverTrigger>
+            <PopoverContent
+              align="start"
+              className="w-[300px] md:w-[400px] overflow-hidden"
+            >
+              <ul className="flex flex-col gap-4 text-xs">
+                <li>
+                  COLOQUE_SUA_POSIÇÃO_AQUI = Ex: CEO, Influencer, empresário...
+                </li>
+                <li>
+                  COLOQUE_SETOR_QUE_ATUA_AQUI = Ex: Roupas, cursos online,
+                  palestras...
+                </li>
+                <li>
+                  COLOQUE_PARA_QUEM_ESTA_DESTINADO_AQUI = Ex: Clientes,
+                  colaboradores, público em geral...
+                </li>
+                <li>
+                  COLOQUE_O_QUE_ESTA_PESQUISANDO_AQUI = Ex: Produto, serviço,
+                  atendimento, liderança...
+                </li>
+              </ul>
+            </PopoverContent>
+          </Popover>
         </DialogHeader>
 
         <form onSubmit={handleSubmit} className="flex flex-col gap-2 mt-2">
-          <Input
+          <Textarea
+            className="min-h-[300px] md:min-h-[150px]"
             placeholder="Qual o ramo do seu negócio?"
             value={input}
             onChange={handleInputChange}
