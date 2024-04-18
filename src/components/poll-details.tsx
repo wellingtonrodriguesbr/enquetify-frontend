@@ -29,7 +29,7 @@ export function PollDetails({ pollId }: { pollId: string }) {
           <Skeleton className=" w-full md:w-[300px] h-[38px] rounded-md" />
         </div>
       ) : (
-        <div className="flex flex-col md:flex-row gap-3 items-center justify-between mb-12 ">
+        <div className="flex flex-col md:flex-row gap-3 items-start justify-between mb-12 ">
           <strong className="max-w-3xl block text-2xl font-semibold">
             Enquete: <span className="text-zinc-500">{poll?.title}</span>
           </strong>
