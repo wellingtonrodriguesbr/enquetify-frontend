@@ -10,10 +10,12 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, EllipsisVertical } from "lucide-react";
 import { Polls } from "@/hooks/use-fetch-polls";
 
 import { CopyLinkButton } from "./copy-link-button";
+import { Button } from "./ui/button";
+import { PollStockOptions } from "./poll-stock-options";
 
 interface PollsTableProps {
   polls: Polls[];
@@ -38,6 +40,7 @@ export function PollsTable({ polls }: PollsTableProps) {
             Total de votos
           </TableHead>
           <TableHead className="text-nowrap text-right"></TableHead>
+          <TableHead className="text-nowrap text-right"></TableHead>
         </TableRow>
       </TableHeader>
 
@@ -60,7 +63,10 @@ export function PollsTable({ polls }: PollsTableProps) {
               <TableCell className="text-right">
                 <CopyLinkButton pollId={poll.id} />
               </TableCell>
-              <TableCell className="text-right">{poll.votes.length}</TableCell>
+              <TableCell className="text-center">{poll.votes.length}</TableCell>
+              <TableCell className="text-right">
+                <PollStockOptions pollId={poll.id} />
+              </TableCell>
               <TableCell className="flex justify-end pt-6">
                 <Link
                   href={`/enquetes/${poll.id}`}
@@ -75,9 +81,10 @@ export function PollsTable({ polls }: PollsTableProps) {
       </TableBody>
       <TableFooter>
         <TableRow>
-          <TableCell colSpan={3}>Total</TableCell>
+          <TableCell colSpan={4}>Total</TableCell>
+          <TableCell className="text-center">{total}</TableCell>
           <TableCell className="text-right"></TableCell>
-          <TableCell className="text-right">{total}</TableCell>
+          <TableCell className="text-right"></TableCell>
           <TableCell className="text-right"></TableCell>
         </TableRow>
       </TableFooter>
