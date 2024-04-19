@@ -10,11 +10,10 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { ArrowRight, EllipsisVertical } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { Polls } from "@/hooks/use-fetch-polls";
 
 import { CopyLinkButton } from "./copy-link-button";
-import { Button } from "./ui/button";
 import { PollStockOptions } from "./poll-stock-options";
 
 interface PollsTableProps {
@@ -53,7 +52,7 @@ export function PollsTable({ polls }: PollsTableProps) {
               </TableCell>
               <TableCell
                 title={poll.title}
-                className="max-w-[400px] text-nowrap text-ellipsis overflow-hidden"
+                className="max-w-[300px] text-nowrap text-ellipsis overflow-hidden"
               >
                 {poll.title}
               </TableCell>

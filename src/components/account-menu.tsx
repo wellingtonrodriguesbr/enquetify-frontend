@@ -13,21 +13,24 @@ import {
 
 import { Dialog } from "./ui/dialog";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
-import { ArrowRight, LogOut } from "lucide-react";
+import { ArrowRight, Loader2, LogOut } from "lucide-react";
 import { useGetProfile } from "@/hooks/use-get-profile";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useLocalStorage } from "react-use";
-import { deleteCookie } from "cookies-next";
+import { useSignOut } from "@/hooks/use-sign-out";
 
 export function AccountMenu() {
   const path = usePathname();
+  const router = useRouter();
   const [_, setAccessToken] = useLocalStorage("accessToken");
 
-  const { profile, loading } = useGetProfile();
+  const { profile } = useGetProfile();
+  const { signOut, isPending } = useSignOut();
 
-  function handleSignOut() {
+  async function handleSignOut() {
+    await signOut();
     setAccessToken("");
-    deleteCookie("refreshToken");
+    router.push("/");
   }
 
   return (
@@ -63,11 +66,18 @@ export function AccountMenu() {
           ) : null}
           <DropdownMenuItem asChild>
             <button
-              className="w-full text-rose-500 hover:text-rose-600 hover:bg-rose-100/40 cursor-pointer font-medium rounded-sm"
+              disabled={isPending}
+              className="w-full disabled:opacity-45 text-rose-500 hover:text-rose-600 hover:bg-rose-100/40 cursor-pointer font-medium rounded-sm"
               onClick={handleSignOut}
             >
-              <LogOut className="mr-2 w-4 h-4" />
-              <span>Sair</span>
+              {isPending ? (
+                <Loader2 className="size-4 animate-spin" />
+              ) : (
+                <>
+                  <LogOut className="mr-2 w-4 h-4" />
+                  <span>Sair</span>
+                </>
+              )}
             </button>
           </DropdownMenuItem>
         </DropdownMenuContent>

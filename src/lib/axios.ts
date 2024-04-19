@@ -26,7 +26,7 @@ api.interceptors.response.use(
     }
 
     if (originalRequest.url === "/token/refresh") {
-      window.location.href = "/entrar";
+      window.location.href = "/";
       localStorage.clear();
       return Promise.reject(error);
     }

@@ -17,7 +17,6 @@ export function useGetProfile() {
   const { data, isFetching, status } = useQuery({
     queryKey: ["profile"],
     queryFn: getProfile,
-    staleTime: Infinity,
     enabled: true,
   });
 
