@@ -19,8 +19,7 @@ const logo = Kalam({
 
 export const metadata: Metadata = {
   title: "Enquetify | Crie e compartilhe enquetes gratuitamente",
-  description:
-    "Crie e compartilhe enquetes com facilidade, garantindo decisões validadas por seus clientes e colaboradores para descobrir, avaliar, medir e engajar. Impulsionando o crescimento do seu negócio.",
+  description: "Crie e compartilhe enquetes gratuitamente.",
   metadataBase: new URL("https://enquetify.app"),
 };
 
