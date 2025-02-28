@@ -1,13 +1,10 @@
-import { Footer } from "@/components/footer";
-import { Header } from "@/components/header";
-import { Hero } from "@/components/hero";
+import { Home } from "@/components/pages/home";
 
-export default function Home() {
+
+export default function HomePage() {
   return (
     <>
-      <Header />
-      <Hero />
-      <Footer />
+      <Home />
     </>
   );
 }

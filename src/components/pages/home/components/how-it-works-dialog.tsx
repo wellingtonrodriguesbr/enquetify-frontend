@@ -1,3 +1,4 @@
+import Link from "next/link";
 import {
   Dialog,
   DialogClose,
@@ -8,8 +9,8 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
-import { Separator } from "./ui/separator";
-import { ArrowRight } from "lucide-react";
+import { Separator } from "@/components/ui/separator";
+import { ArrowRight, ArrowUpRight } from "lucide-react";
 
 export function HowItWorksDialog() {
   return (
@@ -30,14 +31,30 @@ export function HowItWorksDialog() {
       <DialogContent className="max-w-[350px] md:max-w-xl rounded-md">
         <DialogHeader>
           <DialogTitle className="text-2xl font-bold">
-            Veja como é fácil
+            Veja como é fácil começar
           </DialogTitle>
+          <DialogDescription>
+            Com apenas 3 passos simples você pode criar e compartilhar suas
+            enquetes facilmente.
+          </DialogDescription>
         </DialogHeader>
-        <div className="w-full h-36 md:h-48 border rounded-sm flex justify-center items-center">
-          <p>Video de explicação</p>
-        </div>
-        <DialogClose>
-          <Button className="w-full">Entendido</Button>
+        <ul className="flex flex-col">
+          <li className="py-6 border-b">1. Crie uma conta gratuitamente</li>
+          <li className="py-6 border-b">
+            2. Crie sua primeira enquete e compartilhe o link gerado pela
+            plataforma com quem você quiser
+          </li>
+          <li className="py-6 border-b">
+            3. Acompanhe em tempo real os resultados das suas enquetes
+          </li>
+        </ul>
+        <DialogClose asChild>
+          <Button className="w-full" asChild>
+            <Link href="/cadastro">
+              Quero começar agora
+              <ArrowUpRight className="size-4" />
+            </Link>
+          </Button>
         </DialogClose>
       </DialogContent>
     </Dialog>

@@ -5,7 +5,7 @@ export async function POST(request: NextRequest) {
   const token = searchParams?.get("token");
 
   const response = await fetch(
-    `https://recaptchaenterprise.googleapis.com/v1/projects/pollify-app-1713263418254/assessments?key=${process
+    `https://recaptchaenterprise.googleapis.com/v1/projects/enquetify-app-1713263418254/assessments?key=${process
       .env.RECAPTCHA_SECRET_KEY!}`,
     {
       method: "POST",
